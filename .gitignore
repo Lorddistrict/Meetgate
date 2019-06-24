@@ -1,0 +1,10 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/docker-compose.override.yml
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
