@@ -201,6 +201,4 @@ class User implements UserInterface
     {
         $this->isCertified = $isCertified;
     }
-
-
 }
