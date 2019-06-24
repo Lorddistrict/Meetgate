@@ -11,6 +11,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.3.*",
         "symfony/orm-pack": "^1.0",
+        "symfony/security": "4.3.*",
         "symfony/twig-bundle": "4.3.*",
         "symfony/yaml": "4.3.*"
     },
@@ -60,7 +61,9 @@
         }
     },
     "require-dev": {
+        "escapestudios/symfony2-coding-standard": "3",
         "hautelook/alice-bundle": "^2.5",
+        "phpstan/phpstan": "^0.11.8",
         "symfony/maker-bundle": "^1.11"
     }
 }
