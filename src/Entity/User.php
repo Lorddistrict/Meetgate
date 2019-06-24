@@ -141,38 +141,6 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getIsCertified()
-    {
-        return $this->isCertified;
-    }
-
-    /**
-     * @param mixed $isCertified
-     */
-    public function setIsCertified($isCertified): void
-    {
-        $this->isCertified = $isCertified;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResetToken(): string
-    {
-        return $this->resetToken;
-    }
-
-    /**
-     * @param string $resetToken
-     */
-    public function setResetToken(string $resetToken): void
-    {
-        $this->resetToken = $resetToken;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
@@ -181,7 +149,7 @@ class User implements UserInterface
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -197,7 +165,7 @@ class User implements UserInterface
     /**
      * @param mixed $firstname
      */
-    public function setFirstname($firstname): void
+    public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
     }
@@ -213,9 +181,25 @@ class User implements UserInterface
     /**
      * @param mixed $certifiedToken
      */
-    public function setCertifiedToken($certifiedToken): void
+    public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsCertified()
+    {
+        return $this->isCertified;
+    }
+
+    /**
+     * @param mixed $isCertified
+     */
+    public function setIsCertified($isCertified)
+    {
+        $this->isCertified = $isCertified;
     }
 
 
