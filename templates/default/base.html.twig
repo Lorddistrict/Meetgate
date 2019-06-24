@@ -6,17 +6,17 @@
 
         <title>MeetGate&nbsp;|&nbsp;{% block title %}Something{% endblock %}</title>
 
-        {{ include('stylesheets.html.twig') }}
+        {{ include('default/stylesheets.html.twig') }}
 
     </head>
 
     <body>
 
-    {{ include('header.html.twig') }}
+    {{ include('default/header.html.twig') }}
 
     {% block body %}{% endblock %}
 
-    {{ include('scripts.html.twig') }}
+    {{ include('default/scripts.html.twig') }}
 
     </body>
 
