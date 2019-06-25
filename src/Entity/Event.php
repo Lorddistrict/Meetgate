@@ -32,6 +32,11 @@ class Event
     private $description;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $picture;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
      */
     private $eventTalks;
@@ -50,7 +55,6 @@ class Event
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -62,7 +66,6 @@ class Event
     public function setDateEvent(\DateTimeInterface $dateEvent): self
     {
         $this->dateEvent = $dateEvent;
-
         return $this;
     }
 
@@ -74,7 +77,16 @@ class Event
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
 
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
         return $this;
     }
 

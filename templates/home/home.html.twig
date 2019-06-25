@@ -32,25 +32,29 @@
                 </div>
                 <div class="arrow-right"></div>
             </div>
-            <div class="container events">
+            <div class="container-fluid events">
                 <h1>Events</h1><br>
                 <div class="eventlist">
 
                     {% for event in events %}
 
-                    <div class="event">
-                        <div class="row event-title">
-                            {{ event.title }}
+                        <div class="col-md-3 event">
+                            <div class="row event-title">
+                                <a href="#">{{ event.title }}</a>
+                            </div>
+
+                            <div class="row event-content">
+                                <a href="#">
+                                    <img src="{{ asset('img/' . {{ event.picture }}) }}" alt="test">
+                                </a>
+                            </div>
+
+                            <div class="row event-description">
+                                <p>
+                                    {{ event.description }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="row event-content">
-                            <img src="{{ asset('img/' . {{ event.picture }}) }}" alt="">
-                        </div>
-                        <div class="row">
-                            <p>
-                                {{ event.description }}
-                            </p>
-                        </div>
-                    </div>
 
                     {% endfor %}
 
