@@ -195,6 +195,4 @@ class User implements UserInterface
     {
         $this->userTalks = $userTalks;
     }
-
-
 }

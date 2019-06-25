@@ -87,6 +87,4 @@ class Talk
     {
         $this->event = $event;
     }
-
-
 }

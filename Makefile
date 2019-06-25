@@ -51,8 +51,8 @@ exec:
 
 .PHONY: test ## Start an analyze of the code and return a checkup
 test:
-	$(EXEC) vendor/bin/phpcs src
-	$(EXEC) vendor/bin/phpstan analyse --level 6 src
+	$(EXEC) vendor/bin/phpcs --ignore=*/Migrations/* src
+	$(EXEC) vendor/bin/phpstan analyse src -c config/phpstan/phpstan.neon -l 6
 
 
 .PHONY: testF ## Start an analyze of the code and return a checkup
