@@ -5,8 +5,77 @@
 {% block body %}
 
     <div class="meetgate">
-        <div class="container">
+        <div class="container-fluid">
+            <div class="our-talks">
+                <h1>Can we help you ?</h1><br>
+                <a href="#" class="btn btn-top btn-events btn-danger">
+                    <strong>Events</strong>
+                </a>
+                <a href="#" class="btn btn-top btn-themes btn-primary">
+                    <strong>Themes</strong>
+                </a>
+            </div>
+            <div class="researchbar-content">
+                <div class="arrow-left"></div>
+                <div class="rsbar">
+                    <form action="#" method="get">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="Research"
+                                       placeholder="Search">
+                                <button type="submit" class="btn btn-secondary btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="arrow-right"></div>
+            </div>
+            <div class="container events">
+                <h1>Events</h1><br>
+                <div class="eventlist">
 
+                    {% for event in events %}
+
+                    <div class="event">
+                        <div class="row event-title">
+                            {{ event.title }}
+                        </div>
+                        <div class="row event-content">
+                            <img src="{{ asset('img/' . {{ event.picture }}) }}" alt="">
+                        </div>
+                        <div class="row">
+                            <p>
+                                {{ event.description }}
+                            </p>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
     </div>
 
