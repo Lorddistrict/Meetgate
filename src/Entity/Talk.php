@@ -32,11 +32,11 @@ class Talk
      */
     private $author;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventTalks")
-//     * @ORM\JoinColumn(nullable=false)
-//     */
-//    private $event;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventTalks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
 
 
     public function getId(): ?int

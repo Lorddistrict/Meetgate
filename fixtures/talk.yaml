@@ -4,4 +4,4 @@ App\Entity\Talk:
     title: '<word()>'
     description: '<paragraph(3, true)>'
     author: '@user-<numberBetween(1,100)>'
-#    event: '@event-<numberBetween(1,5)>'
+    event: '@event-<numberBetween(1,5)>'

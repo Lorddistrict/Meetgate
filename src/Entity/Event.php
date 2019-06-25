@@ -31,10 +31,10 @@ class Event
      */
     private $description;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
-//     */
-//    private $eventTalks;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
+     */
+    private $eventTalks;
 
 
     public function getId(): ?int
