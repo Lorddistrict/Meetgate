@@ -1,0 +1,6 @@
+App\Entity\Event:
+  event-{1..10}:
+    __construct: false
+    title (unique): '<word()>'
+    dateEvent: "<dateTimeBetween('2 year ago', 'now')>"
+    description: '<paragraph(3, true)>'

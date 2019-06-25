@@ -54,22 +54,28 @@ class User implements UserInterface
     private $isCertified = false;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="author")
+     */
+    private $userTalks;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
      * Token you will send in order identify the mail owner
      */
     protected $resetToken;
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -87,6 +93,7 @@ class User implements UserInterface
         return (string) $this->email;
     }
 
+
     /**
      * @see UserInterface
      */
@@ -98,13 +105,13 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
+
 
     /**
      * @see UserInterface
@@ -113,13 +120,13 @@ class User implements UserInterface
     {
         return (string) $this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
+
 
     /**
      * @see UserInterface
@@ -128,6 +135,7 @@ class User implements UserInterface
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
+
 
     /**
      * @see UserInterface
@@ -138,67 +146,53 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getName()
     {
         return $this->name;
     }
-
-    /**
-     * @param mixed $name
-     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getFirstname()
     {
         return $this->firstname;
     }
-
-    /**
-     * @param mixed $firstname
-     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getCertifiedToken()
     {
         return $this->certifiedToken;
     }
-
-    /**
-     * @param mixed $certifiedToken
-     */
     public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getIsCertified()
     {
         return $this->isCertified;
     }
-
-    /**
-     * @param mixed $isCertified
-     */
     public function setIsCertified($isCertified)
     {
         $this->isCertified = $isCertified;
+    }
+
+
+    public function getUserTalks()
+    {
+        return $this->userTalks;
+    }
+    public function setUserTalks($userTalks): void
+    {
+        $this->userTalks = $userTalks;
     }
 }
