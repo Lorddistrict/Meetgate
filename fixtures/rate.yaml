@@ -1,0 +1,16 @@
+App\Entity\Rate:
+  rate-1:
+    __construct: false
+    star: 1
+  rate-2:
+    __construct: false
+    star: 2
+  rate-3:
+    __construct: false
+    star: 3
+  rate-4:
+    __construct: false
+    star: 4
+  rate-5:
+    __construct: false
+    star: 5

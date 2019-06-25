@@ -27,20 +27,26 @@ class Event
     private $dateEvent;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
+     */
+    private $eventTalks;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+
     public function getTitle(): ?string
     {
         return $this->title;
     }
-
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -48,11 +54,11 @@ class Event
         return $this;
     }
 
+
     public function getDateEvent(): ?\DateTimeInterface
     {
         return $this->dateEvent;
     }
-
     public function setDateEvent(\DateTimeInterface $dateEvent): self
     {
         $this->dateEvent = $dateEvent;
@@ -60,15 +66,25 @@ class Event
         return $this;
     }
 
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
-
     public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
+    }
+
+
+    public function getEventTalks()
+    {
+        return $this->eventTalks;
+    }
+    public function setEventTalks($eventTalks): void
+    {
+        $this->eventTalks = $eventTalks;
     }
 }
