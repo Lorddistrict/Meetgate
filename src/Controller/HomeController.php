@@ -20,7 +20,7 @@ class HomeController extends AbstractController
         $eventRepository = $doctrine->getRepository(Event::class);
 
         /** @var Event $events */
-        $events = $eventRepository->findAll();
+        $events = $eventRepository->getNextEvents();
 
         return $this->render('home/home.html.twig', [
             'events' => $events,

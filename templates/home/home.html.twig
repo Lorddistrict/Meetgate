@@ -4,6 +4,13 @@
 
 {% block body %}
 
+    <style type="text/css">
+        ul.ui-autocomplete{padding: 10px 0 0 13px; list-style-type: none; background-color: #efefef;!important;
+            max-width: 34.9%; color: #0d0d0d;}
+        li.ui-menu-item{list-style-type: none; margin: 0; padding: 10px 0;}
+        li.ui-menu-item:hover{cursor: pointer;}
+    </style>
+
     <div class="meetgate">
         <div class="container-fluid ">
             <div class="intro">
@@ -22,7 +29,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" aria-label="Research"
-                                       placeholder="Search" id="search">
+                                       placeholder="Search (event)" id="search">
                                 <button type="button" class="btn btn-secondary btn-search">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -96,11 +103,27 @@
                     url: '{{ url('search') }}',
                     type: 'GET',
                     success: function(data){
-                        $( "#search" ).autocomplete({
-                            source: data[0]
+                        $('#search').autocomplete({
+                            source: data[0],
+                            select: function(value, data){
+                                console.log('You selected: ' + data.item.value);
+
+                                $.ajax({
+                                    url: '{{ url('search_event') }}',
+                                    type: 'GET',
+                                    data: 'research=' + data.item.value,
+                                    success: function(data){
+                                        console.log(data[0]);
+                                        var url = '{{ url('event', { id : 'id' }) }}';
+                                        url = url.replace('id', data[0]);
+                                        window.location.replace(url);
+                                    }
+                                });
+
+                            }
                         });
                     }
-                })
+                });
             });
         });
     </script>

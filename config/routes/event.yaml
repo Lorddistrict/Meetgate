@@ -2,8 +2,12 @@ event:
   path: /{id}
   controller: 'App\Controller\EventController::view'
   requirements:
-    id: \d+
+    id: \d+|id
 
 search:
   path: /search
-  controller: 'App\Controller\EventController::searchBarAjax'
+  controller: 'App\Controller\AjaxController::searchBarAjax'
+
+search_event:
+  path: /search_event
+  controller: 'App\Controller\AjaxController::searchByEventName'
