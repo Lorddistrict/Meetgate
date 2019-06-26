@@ -4,4 +4,4 @@ App\Entity\Event:
     title (unique): '<word()>'
     dateEvent: "<dateTimeBetween('2 year ago', 'now')>"
     description: '<paragraph(3, true)>'
-    picture: '<imageGenerator()>'
+    picture: '<imageUrl(640, 480)>'

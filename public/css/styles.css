@@ -8,16 +8,24 @@ div.meetgate div.container-fluid div.our-talks a.btn-top{padding: 15px 30px; fon
 div.meetgate div.container-fluid div.our-talks a.btn-events{margin-right: 20px;}
 div.meetgate div.container-fluid div.our-talks a.btn-themes{margin-left: 20px;}
 div.meetgate div.container-fluid div.researchbar-content{display: inline-block; text-align: center; width: 100%;}
-div.meetgate div.container-fluid div.researchbar-content div.rsbar{width: 40%; background-color: #3a3a3a; padding: 10px 10px; margin: 0 auto; display: inline-block; vertical-align: top; margin-left: -4px; margin-right: -4px;}
-div.meetgate div.container-fluid div.researchbar-content div.arrow-left{display: inline-block; width: 0; height: 0; border-top: 35px solid transparent; border-right : 61px solid #3a3a3a; border-bottom : 35px solid transparent;}
-div.meetgate div.container-fluid div.researchbar-content div.arrow-right{display: inline-block; width: 0; height: 0; border-top: 35px solid transparent; border-left : 61px solid #3a3a3a; border-bottom : 35px solid transparent;}
+div.meetgate div.container-fluid div.researchbar-content div.rsbar{width: 40%; background-color: #3a3a3a;
+    padding: 10px 10px; margin: 0 auto; display: inline-block; vertical-align: top; margin-left: -4px; margin-right: -4px;}
+div.meetgate div.container-fluid div.researchbar-content div.arrow-left{display: inline-block; width: 0; height: 0;
+    border-top: 35px solid transparent; border-right : 61px solid #3a3a3a; border-bottom : 35px solid transparent;}
+div.meetgate div.container-fluid div.researchbar-content div.arrow-right{display: inline-block; width: 0; height: 0;
+    border-top: 35px solid transparent; border-left : 61px solid #3a3a3a; border-bottom : 35px solid transparent;}
 div.meetgate div.container-fluid div.researchbar-content div.form-group{margin-bottom: 0;}
 div.meetgate div.container-fluid div.researchbar-content div.form-group input{border-radius: 0; height: 50px;}
-div.meetgate div.container-fluid div.researchbar-content div.form-group button.btn-search{border-radius: 0 6.4px 6.4px 0; padding: 0 30px;}
+div.meetgate div.container-fluid div.researchbar-content div.form-group button.btn-search{border-radius: 0 6.4px 6.4px 0;
+    padding: 0 30px;}
 div.meetgate div.container-fluid div.events{text-align: center; margin: 50px 0 0 0;}
 div.meetgate div.container-fluid div.events div.eventlist{display: inline-block; text-align: center;}
-div.meetgate div.container-fluid div.events div.eventlist div.event{display: inline-block; border: 1px solid #333333; margin: 0 10px;}
-div.meetgate div.container-fluid div.events div.eventlist div.event div.event-title{border-bottom: 1px solid #333333; padding: 10px 20px; text-transform: uppercase;}
-div.meetgate div.container-fluid div.events div.eventlist div.event div.event-content{border-bottom: 1px solid #333333; padding: 0; overflow: hidden;}
+div.meetgate div.container-fluid div.events div.eventlist div.event{display: inline-block; border: 1px solid #d2d2d2;
+    background-color: #e6e6e6; min-height: 640px; margin: 0 10px 30px 10px;}
+div.meetgate div.container-fluid div.events div.eventlist div.event div.event-title{border-bottom: 1px solid #d2d2d2;
+    padding: 10px 20px; text-transform: uppercase;}
+div.meetgate div.container-fluid div.events div.eventlist div.event div.event-content{border-bottom: 1px solid #d2d2d2;
+    padding: 0; overflow: hidden;}
 div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description{padding: 0 20px;}
-div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description p{text-align: left; padding: 10px 0;}
+div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description p{text-align: left;
+    padding: 10px 0;}

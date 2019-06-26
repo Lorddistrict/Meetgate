@@ -40,18 +40,23 @@
 
                         <div class="col-md-3 event">
                             <div class="row event-title">
-                                <a href="#">{{ event.title }}</a>
+                                <a href="{{ url('event', {id : event.id}) }}">{{ event.title }}</a>
                             </div>
 
                             <div class="row event-content">
-                                <a href="#">
-                                    <img src="{{ asset('img/' . {{ event.picture }}) }}" alt="test">
+                                <a href="{{ url('event', {id : event.id}) }}">
+                                    <img src="{{ event.picture }}" alt="test">
                                 </a>
                             </div>
 
                             <div class="row event-description">
                                 <p>
-                                    {{ event.description }}
+                                    {{ event.description|length > 100 ? event.description|slice(0, 100) ~ '...' : event
+                                    .description }}
+                                    <br>
+                                    <a href="{{ url('event', {id : event.id}) }}">
+                                        <i class="fas fa-chevron-right"></i>&nbsp;read more
+                                    </a>
                                 </p>
                             </div>
                         </div>

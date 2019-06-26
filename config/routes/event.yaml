@@ -1,0 +1,5 @@
+event:
+  path: /{id}
+  controller: 'App\Controller\EventController::view'
+  requirements:
+    id: \d+
