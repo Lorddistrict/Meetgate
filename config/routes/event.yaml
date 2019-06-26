@@ -3,3 +3,7 @@ event:
   controller: 'App\Controller\EventController::view'
   requirements:
     id: \d+
+
+search:
+  path: /search
+  controller: 'App\Controller\EventController::searchBarAjax'
