@@ -58,6 +58,11 @@ class Event
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adress;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -123,7 +128,7 @@ class Event
         return $this;
     }
 
-    public function getDuration()
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
@@ -133,7 +138,7 @@ class Event
         return $this;
     }
 
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -160,7 +165,6 @@ class Event
 
         return $this;
     }
-
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -168,6 +172,16 @@ class Event
             $tag->removeEvent($this);
         }
 
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
         return $this;
     }
 

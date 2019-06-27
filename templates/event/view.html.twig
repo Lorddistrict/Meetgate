@@ -44,14 +44,40 @@
                                     {% endfor %}
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>Adress : </strong>
+                                    {{ event.adress }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="clear"></div>
+                    <br>
                     <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id='map' style='width: 100%; min-height: 700px;'></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Hello !
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        var mymap = L.map('map').setView([37, 37], 15);
+        L.tileLayer('https://tile.jawg.io/jawg-streets/{z}/{x}/{y}.png?access-token=Jzs7FO4Bpk5YlFY8MFqVd4nErx9UwWkbJIYlpxsDdbpv0jCp7XunDMnFN9h9Hbqa&text=Montreau', {}).addTo(mymap);
+        L.control.geocoder('Jzs7FO4Bpk5YlFY8MFqVd4nErx9UwWkbJIYlpxsDdbpv0jCp7XunDMnFN9h9Hbqa', {url: 'https://api.jawg.io/places/v1', autocomplete: true}).addTo(mymap);
+        console.log(mymap);
+    </script>
 
     <script type="application/javascript">
         $(document).ready(function(){

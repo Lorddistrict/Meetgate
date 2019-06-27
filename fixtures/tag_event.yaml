@@ -1,9 +1,0 @@
-App\Entity\Event:
-  event-{1..10}:
-    __construct: false
-    title (unique): '<word()>'
-    dateEvent: "<dateTimeBetween('2 year ago', 'now')>"
-    description: '<paragraph(10, true)>'
-    picture: '<imageUrl(640, 480)>'
-    duration: '<numberBetween(1,7)>'
-    price: '<randomFloat(2, 0, 50)>'
