@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,9 +39,29 @@ class Event
     private $picture;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $duration;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
      */
     private $eventTalks;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="event")
+     */
+    private $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -95,8 +117,59 @@ class Event
     {
         return $this->eventTalks;
     }
-    public function setEventTalks($eventTalks): void
+    public function setEventTalks($eventTalks): self
     {
         $this->eventTalks = $eventTalks;
+        return $this;
     }
+
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+    public function setDuration($duration): self
+    {
+        $this->duration = $duration;
+        return $this;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+    public function setPrice($price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+            $tag->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+            $tag->removeEvent($this);
+        }
+
+        return $this;
+    }
+
+
 }

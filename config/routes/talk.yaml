@@ -1,0 +1,3 @@
+view:
+  path: /{id}
+  controller: App\Controller\TalkController::view

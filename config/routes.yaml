@@ -5,3 +5,11 @@ index:
 event:
     resource: 'routes/event.yaml'
     prefix: '/event'
+
+talk:
+    resource: 'routes/talk.yaml'
+    prefix: '/talk'
+
+tag:
+    resource: 'routes/tag.yaml'
+    prefix: '/tag'

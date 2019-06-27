@@ -13,6 +13,25 @@ class EventController extends AbstractController
 {
     /**
      * @param Request $request
+     * @return Response
+     */
+    public function events(Request $request) : Response
+    {
+        $doctrine = $this->getDoctrine();
+
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $doctrine->getRepository(Event::class);
+
+        /** @var Event[] $events */
+        $events = $eventRepository->findAll();
+
+        return $this->render('event/view.html.twig', [
+            'event' => $events,
+        ]);
+    }
+
+    /**
+     * @param Request $request
      * @param Event $event
      * @return Response
      */
@@ -24,10 +43,10 @@ class EventController extends AbstractController
         $eventRepository = $doctrine->getRepository(Event::class);
 
         /** @var Event $event */
-        $oneEvent = $eventRepository->findOneBy(['id' => $event->getId()]);
+        $event = $eventRepository->findOneBy(['id' => $event->getId()]);
 
         return $this->render('event/view.html.twig', [
-            'event' => $oneEvent,
+            'event' => $event,
         ]);
     }
 }

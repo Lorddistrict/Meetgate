@@ -1,8 +1,11 @@
 /* Home */
 
 div.no-margin{margin: 0;}
- div.meetgate {position: relative;
-     display: inline-block; max-width: 1920px; width: 100%; max-height: 1080px; height: 100%;}
+div.clear{clear: both;}
+span.price{color: darkgreen;}
+a.tag-link,
+a.tag-link:hover{text-decoration: none;}
+div.meetgate {position: relative; display: inline-block; max-width: 1920px; width: 100%; max-height: 1080px; height: 100%;}
 div.meetgate div.container-fluid{padding: 0;}
 div.meetgate div.container-fluid div.intro{background: url("../img/mainBackground.jpg") top center no-repeat;}
 div.meetgate div.container-fluid div.our-talks{padding: 300px 0 594px 0; width: 100%; text-align: center;}
@@ -30,3 +33,12 @@ div.meetgate div.container-fluid div.create-yourself .entity{padding: 0 100px; d
 div.meetgate div.container-fluid div.create-yourself .entity a{text-decoration: none; color: #c1c1c1;}
 div.meetgate div.container-fluid div.create-yourself .entity a:hover{text-decoration: none; color: #ffffff;}
 div.meetgate div.container-fluid div.create-yourself .entity span{vertical-align: top; font-size: 30px; line-height: 62px; padding-left: 20px;}
+
+div.meetgate div.event{}
+div.meetgate div.event div.intro{background: linear-gradient(110deg, #b0ffae, white); max-width: 100%; height: 510px; text-align: center; padding: 30px 0;}
+div.meetgate div.event div.intro h1{text-transform: uppercase; text-align: left; padding-left: 46%;}
+div.meetgate div.event div.intro div.intro-content{padding: 0; background-color: white; border-radius: 10px; width: 80%; margin: 0 auto; box-shadow: 2px 2px 10px lightgrey;}
+div.meetgate div.event div.intro div.intro-content p{margin-bottom: 0;}
+div.meetgate div.event div.intro div.intro-content img{float: left; border-radius: 10px 0 0 0;}
+div.meetgate div.event div.intro div.intro-content .aside{padding-top: 20px;}
+div.meetgate div.event div.intro div.intro-content .aside .desc{text-align: left; padding-left: 46%; padding-right: 20px;}
