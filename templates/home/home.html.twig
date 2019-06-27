@@ -4,6 +4,128 @@
 
 {% block body %}
 
+    <style type="text/css">
+        ul.ui-autocomplete{padding: 10px 0 0 13px; list-style-type: none; background-color: #efefef;!important;
+            max-width: 34.9%; color: #0d0d0d;}
+        li.ui-menu-item{list-style-type: none; margin: 0; padding: 10px 0;}
+        li.ui-menu-item:hover{cursor: pointer;}
+    </style>
 
+    <div class="meetgate">
+        <div class="container-fluid ">
+            <div class="intro">
+                <div class="our-talks">
+                    <h1>Can we help you ?</h1><br>
+                    <a href="#" class="btn btn-top btn-events btn-danger">
+                        <strong>Events</strong>
+                    </a>
+                    <a href="#" class="btn btn-top btn-themes btn-primary">
+                        <strong>Themes</strong>
+                    </a>
+                </div>
+                <div class="researchbar-content">
+                    <div class="arrow-left"></div>
+                    <div class="rsbar">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" aria-label="Research"
+                                       placeholder="Search (event)" id="search">
+                                <button type="button" class="btn btn-secondary btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-right"></div>
+                </div>
+            </div>
+            <div class="container-fluid events">
+                <h1>Events</h1><br>
+                <div class="eventlist">
+
+                    {% for event in events %}
+
+                        <div class="col-md-4 event">
+                            <div class="row event-title">
+                                <a href="{{ url('event', {id : event.id}) }}">{{ event.title }}</a>
+                            </div>
+
+                            <div class="row event-content">
+                                <a href="{{ url('event', {id : event.id}) }}">
+                                    <img src="{{ event.picture }}" alt="test">
+                                </a>
+                            </div>
+
+                            <div class="row event-description">
+                                <p>
+                                    {{ event.description|length > 100 ? event.description|slice(0, 100) ~ '...' : event
+                                    .description }}
+                                    <br><br>
+                                    <a href="{{ url('event', {id : event.id}) }}">
+                                        <i class="fas fa-chevron-right"></i>&nbsp;read more
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+                <div class="create-yourself">
+                    <div class="row no-margin">
+                        <div class="col-md-12">
+                            <h3>Organisez vos evenements !</h3>
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-md-6 text-right entity">
+                            <a href="">
+                                <i class="fas fa-project-diagram fa-4x"></i>
+                                <span>Decouvrez</span>
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-left entity">
+                            <a href="">
+                                <i class="fas fa-calendar-plus fa-4x"></i>
+                                <span>Creez vous-meme</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#search').one('keyup', function(){
+                $.ajax({
+                    url: '{{ url('search') }}',
+                    type: 'GET',
+                    success: function(data){
+                        $('#search').autocomplete({
+                            source: data[0],
+                            select: function(value, data){
+                                console.log('You selected: ' + data.item.value);
+
+                                $.ajax({
+                                    url: '{{ url('search_event') }}',
+                                    type: 'GET',
+                                    data: 'research=' + data.item.value,
+                                    success: function(data){
+                                        console.log(data[0]);
+                                        var url = '{{ url('event', { id : 'id' }) }}';
+                                        url = url.replace('id', data[0]);
+                                        window.location.replace(url);
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 {% endblock %}
