@@ -75,7 +75,7 @@ class Event
 
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->tag = new ArrayCollection();
     }
 
 
@@ -163,13 +163,13 @@ class Event
      */
     public function getTags(): Collection
     {
-        return $this->tags;
+        return $this->tag;
     }
 
     public function addTag(Tag $tag): self
     {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
+        if (!$this->tag->contains($tag)) {
+            $this->tag[] = $tag;
             $tag->addEvent($this);
         }
 
@@ -177,8 +177,8 @@ class Event
     }
     public function removeTag(Tag $tag): self
     {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
+        if ($this->tag->contains($tag)) {
+            $this->tag->removeElement($tag);
             $tag->removeEvent($this);
         }
 
