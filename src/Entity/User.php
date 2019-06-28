@@ -65,6 +65,10 @@ class User implements UserInterface
      */
     protected $resetToken;
 
+    /*
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="user")
+     */
+    private $event;
 
     public function getId(): ?int
     {
@@ -76,6 +80,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -90,7 +95,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
 
@@ -105,6 +110,7 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -118,8 +124,9 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
+
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -151,6 +158,7 @@ class User implements UserInterface
     {
         return $this->name;
     }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -161,6 +169,7 @@ class User implements UserInterface
     {
         return $this->firstname;
     }
+
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -171,6 +180,7 @@ class User implements UserInterface
     {
         return $this->certifiedToken;
     }
+
     public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
@@ -181,6 +191,7 @@ class User implements UserInterface
     {
         return $this->isCertified;
     }
+
     public function setIsCertified($isCertified)
     {
         $this->isCertified = $isCertified;
@@ -191,6 +202,7 @@ class User implements UserInterface
     {
         return $this->userTalks;
     }
+
     public function setUserTalks($userTalks): void
     {
         $this->userTalks = $userTalks;

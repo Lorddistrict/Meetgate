@@ -9,6 +9,7 @@
 /vendor/
 tmp/
 .idea/
+tmp/
 ###< symfony/framework-bundle ###
 
 ###> squizlabs/php_codesniffer ###
