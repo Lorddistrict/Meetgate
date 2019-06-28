@@ -44,9 +44,9 @@ body, html {
 /*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #4661ff;
+	font-size: 16px;
+	line-height: 1.6;
+	color: #f3ffea;
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
