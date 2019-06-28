@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Talk;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,12 +42,20 @@ class EventController extends AbstractController
 
         /** @var EventRepository $eventRepository */
         $eventRepository = $doctrine->getRepository(Event::class);
+        $talkRepository = $doctrine->getRepository(Talk::class);
 
         /** @var Event $event */
         $event = $eventRepository->findOneBy(['id' => $event->getId()]);
 
+        /** @var Talk[] $talks */
+        $talks = $talkRepository->findBy(['event' => $event->getId()]);
+
+        $reserved = $event->getUser()->count();
+
         return $this->render('event/view.html.twig', [
             'event' => $event,
+            'reserved' => $reserved,
+            'talks' => $talks,
         ]);
     }
 

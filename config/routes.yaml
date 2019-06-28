@@ -3,13 +3,35 @@ index:
     controller: App\Controller\HomeController::index
 
 event:
-    resource: 'routes/event.yaml'
-    prefix: '/event'
+    resource: routes/event.yaml
+    prefix: /event
 
 talk:
-    resource: 'routes/talk.yaml'
-    prefix: '/talk'
+    resource: routes/talk.yaml
+    prefix: /talk
 
 tag:
-    resource: 'routes/tag.yaml'
-    prefix: '/tag'
+    resource: routes/tag.yaml
+    prefix: /tag
+
+user:
+    resource: routes/user.yaml
+    prefix: /user
+
+# Connexions
+
+login:
+    path: /login
+    controller: App\Controller\UserController::login
+
+register:
+    path: /register
+    controller: App\Controller\UserController::register
+
+confirm:
+    path: /register/confirm/{token}
+    controller: App\Controller\UserController::confirm
+
+logout:
+    path: /logout
+    controller: App\Controller\UserController::logout

@@ -1,0 +1,7 @@
+users:
+  path: /users
+  controller: App\Controller\UserController::users
+
+user:
+  path: /user/{id}
+  controller: App\Controller\UserController::view

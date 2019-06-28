@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -65,6 +67,15 @@ class User implements UserInterface
      */
     protected $resetToken;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="users")
+     */
+    private $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +87,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -90,7 +102,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
 
@@ -105,6 +117,7 @@ class User implements UserInterface
 
         return array_unique($roles);
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -118,8 +131,9 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
+
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -151,6 +165,7 @@ class User implements UserInterface
     {
         return $this->name;
     }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -161,6 +176,7 @@ class User implements UserInterface
     {
         return $this->firstname;
     }
+
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -171,6 +187,7 @@ class User implements UserInterface
     {
         return $this->certifiedToken;
     }
+
     public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
@@ -181,6 +198,7 @@ class User implements UserInterface
     {
         return $this->isCertified;
     }
+
     public function setIsCertified($isCertified)
     {
         $this->isCertified = $isCertified;
@@ -191,8 +209,35 @@ class User implements UserInterface
     {
         return $this->userTalks;
     }
+
     public function setUserTalks($userTalks): void
     {
         $this->userTalks = $userTalks;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->addUser($this);
+        }
+
+        return $this;
+    }
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            $event->removeUser($this);
+        }
+
+        return $this;
     }
 }

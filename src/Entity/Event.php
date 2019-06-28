@@ -54,14 +54,9 @@ class Event
     private $eventTalks;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="event")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="events")
      */
-    private $tag;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="event")
-     */
-    private $user;
+    private $tags;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -73,9 +68,15 @@ class Event
      */
     private $places;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="events")
+     */
+    private $users;
+
     public function __construct()
     {
-        $this->tag = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -163,13 +164,12 @@ class Event
      */
     public function getTags(): Collection
     {
-        return $this->tag;
+        return $this->tags;
     }
-
     public function addTag(Tag $tag): self
     {
-        if (!$this->tag->contains($tag)) {
-            $this->tag[] = $tag;
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
             $tag->addEvent($this);
         }
 
@@ -177,8 +177,8 @@ class Event
     }
     public function removeTag(Tag $tag): self
     {
-        if ($this->tag->contains($tag)) {
-            $this->tag->removeElement($tag);
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
             $tag->removeEvent($this);
         }
 
@@ -202,6 +202,30 @@ class Event
     public function setPlaces(int $places): self
     {
         $this->places = $places;
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->users;
+    }
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+
         return $this;
     }
 

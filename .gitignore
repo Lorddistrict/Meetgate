@@ -7,8 +7,9 @@
 /public/bundles/
 /var/
 /vendor/
-tmp/
+/tmp/*
 .idea/
+tmp/
 ###< symfony/framework-bundle ###
 
 ###> squizlabs/php_codesniffer ###
