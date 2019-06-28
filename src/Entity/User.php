@@ -65,6 +65,10 @@ class User implements UserInterface
      */
     protected $resetToken;
 
+    /*
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="user")
+     */
+    private $event;
 
     public function getId(): ?int
     {
