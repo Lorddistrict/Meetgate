@@ -24,7 +24,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="tag")
      */
     private $event;
 

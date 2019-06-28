@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <strong>Tags : </strong>
-                                    {% for tag in event.tags %}
+                                    {% for tag in event.tag %}
                                         <a href="{{ url('tag', { id: tag.id }) }}" class="tag-link">
                                             <span class="badge badge-pill badge-success">{{ tag.name }}</span>&nbsp;
                                         </a>
@@ -50,24 +50,30 @@
                                     {{ event.adress }}
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{{ url('join', { id: event.id } ) }}" class="btn btn-success">Je participe</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="clear"></div>
                     <br>
                     <hr>
 
-                    <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id='map' style='width: 100%; min-height: 500px;'></div>
+                            </div>
 
-                        <div class="col-md-6">
-                            <div id='map' style='width: 100%; min-height: 700px;'></div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    Hello !<br>
-                                    <strong>LATITUDE : </strong><span id="lat"></span><br>
-                                    <strong>LONGITUDE : </strong><span id="lon"></span>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Hello !<br>
+                                        <strong>LATITUDE : </strong><span id="lat"></span><br>
+                                        <strong>LONGITUDE : </strong><span id="lon"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +88,8 @@
 
         $(document).ready(function () {
 
-            $.get("https://nominatim.openstreetmap.org/search/" + "367 rue de Crespy" + "?format=json",
+            // $.get("https://nominatim.openstreetmap.org/search/" + "367 rue de Crespy" + "?format=json",
+            $.get("https://nominatim.openstreetmap.org/search/" + "rue des allees" + "?format=json",
                 function (data) {
 
                     console.log(data[0]);
@@ -91,7 +98,7 @@
                     $('#lon').append(data[0].lon);
 
                     var map = L.map('map');
-                    map.setView([ data[0].lat, data[0].lon ], 10);
+                    map.setView([ data[0].lat, data[0].lon ], 15);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

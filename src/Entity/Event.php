@@ -56,12 +56,22 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="event")
      */
-    private $tags;
+    private $tag;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="event")
+     */
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $adress;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $places;
 
     public function __construct()
     {
@@ -182,6 +192,16 @@ class Event
     public function setAdress(string $adress): self
     {
         $this->adress = $adress;
+        return $this;
+    }
+
+    public function getPlaces(): ?int
+    {
+        return $this->places;
+    }
+    public function setPlaces(int $places): self
+    {
+        $this->places = $places;
         return $this;
     }
 

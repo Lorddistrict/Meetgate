@@ -49,4 +49,16 @@ class EventController extends AbstractController
             'event' => $event,
         ]);
     }
+
+
+    public function join(Request $request, Event $event) : Response
+    {
+        $doctrine = $this->getDoctrine();
+
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $doctrine->getRepository(Event::class);
+
+        /** @var Event $event */
+        $event = $eventRepository->find($event->getId());
+    }
 }
