@@ -97,38 +97,51 @@
 
                         {% for talk in talks %}
 
-                            {% set i = 0 %}
+                            {% set cumulatedRates = 0 %}
 
                             <div class="col-md-6 talks-back">
                                 <div class="row talks-row">
                                     <div class="col-md-10 talk-title">
-                                        <a href="{{ url('view', { id: talk.id } ) }}">
-                                            <h2>{{ talk.title }}</h2>
+                                        <a href="{{ url('view', { id: talk[0].id } ) }}">
+                                            <h2>{{ talk[0].title }}</h2>
                                         </a>
                                     </div>
                                     <div class="col-md-2 talk-rate">
 
-                                        {% for rate in talk.rates %}
-
-                                            {% set i = i + rate.stars %}
-                                            <i class="fas fa-star"></i>
-
+                                        {% for rate in talk[0].rates %}
+                                            {% set cumulatedRates = cumulatedRates + rate.stars %}
                                         {% endfor %}
-                                        {% for iter in talk.rates|length..4 %}
 
-                                            <i class="far fa-star"></i>
+                                        {% if talk[0].rates|length != 0 %}
+                                            {% set stars = cumulatedRates / talk[0].rates|length %}
 
-                                        {% endfor %}
+                                            {% for iter in 1..stars %}
+                                                <i class="fas fa-star"></i>
+                                            {% endfor %}
+
+                                            {% if stars != 5 %}
+                                                {% for iter in stars+1..5 %}
+                                                    <i class="far fa-star"></i>
+                                                {% endfor %}
+                                            {% endif %}
+
+                                        {% else %}
+
+                                            {% for iter in 1..5 %}
+                                                <i class="far fa-star"></i>
+                                            {% endfor %}
+
+                                        {% endif %}
 
                                     </div>
                                     <hr class="talk-hr">
-                                    <div class="col-md-12 talk-desc">{{ talk.description }}</div>
+                                    <div class="col-md-12 talk-desc">{{ talk[0].description }}</div>
                                     <hr class="talk-hr">
                                     <div class="col-md-12 talk-author">
                                         Talk animated by&nbsp;
-                                        <a href="{{ url('user', { id: talk.author.id } ) }}">
-                                            {{ talk.author.name|capitalize }}&nbsp;
-                                            {{ talk.author.firstname }}
+                                        <a href="{{ url('user', { id: talk[0].author.id } ) }}">
+                                            {{ talk[0].author.name|capitalize }}&nbsp;
+                                            {{ talk[0].author.firstname }}
                                         </a>
                                     </div>
                                 </div>
