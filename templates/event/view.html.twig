@@ -28,14 +28,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <strong>Duree : </strong>
-                                        {{ (event.duration > 1) ? event.duration ~ ' jours' : event.duration ~ ' jour' }}
+                                        <strong>Duration : </strong>
+                                        {{ (event.duration > 1) ? event.duration ~ ' days' : event.duration ~ ' day' }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <strong>Prix : </strong>
-                                        <span class="price">{{ (event.price > 0) ? event.price ~ '$' : 'Gratuit' }}</span>
+                                        <strong>Price : </strong>
+                                        <span class="price">{{ (event.price > 0) ? '$' ~ event.price : 'Gratuit' }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -56,14 +56,27 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <strong>Participants : </strong>
+                                        <strong>Members : </strong>
                                         {{ reserved }}/{{ event.places }}
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
+
+                                        {% if app.user == null %}
+
+                                        <small class="ban">You have to be connected to participate</small><br>
+                                        <button class="btn btn-success not-allowed" disabled>
+                                            <i class="fas fa-ban"></i>&nbsp;Je participe
+                                        </button>
+
+                                        {% else %}
+
                                         <a href="{{ url('join', { id: event.id } ) }}" class="btn btn-success">Je participe</a>
+
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
@@ -84,15 +97,29 @@
 
                         {% for talk in talks %}
 
+                            {% set i = 0 %}
+
                             <div class="col-md-6 talks-back">
                                 <div class="row talks-row">
                                     <div class="col-md-10 talk-title">
                                         <a href="{{ url('view', { id: talk.id } ) }}">
-                                            {{ talk.title }}
+                                            <h2>{{ talk.title }}</h2>
                                         </a>
                                     </div>
                                     <div class="col-md-2 talk-rate">
-                                        *****
+
+                                        {% for rate in talk.rates %}
+
+                                            {% set i = i + rate.stars %}
+                                            <i class="fas fa-star"></i>
+
+                                        {% endfor %}
+                                        {% for iter in talk.rates|length..4 %}
+
+                                            <i class="far fa-star"></i>
+
+                                        {% endfor %}
+
                                     </div>
                                     <hr class="talk-hr">
                                     <div class="col-md-12 talk-desc">{{ talk.description }}</div>
@@ -106,7 +133,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         {% endfor %}
 
                     </div>
@@ -148,6 +174,22 @@
                     L.marker([ data[0].lat, data[0].lon ]).addTo(map).bindPopup('{{ event.adress }}').openPopup();
                 }
             );
+
+            $(document).ready(function(){
+                $('.starrr').starrr({
+                    rating: 3
+                });
+                $('#star1').starrr({
+                    change: function(e, value){
+                        if (value) {
+                            $('.your-choice-was').show();
+                            $('.choice').text(value);
+                        } else {
+                            $('.your-choice-was').hide();
+                        }
+                    }
+                });
+            });
 
 
         });

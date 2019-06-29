@@ -5,6 +5,8 @@ div.clear{clear: both;}
 span.price{color: darkgreen;}
 a.tag-link,
 a.tag-link:hover{text-decoration: none;}
+small.ban{color: red;}
+button.not-allowed:hover{cursor: not-allowed;}
 div.meetgate {position: relative; display: inline-block; max-width: 1920px; width: 100%; max-height: 1080px; height: 100%;}
 div.meetgate div.container-fluid{padding: 0;}
 div.meetgate div.container-fluid div.intro{background: url("../img/mainBackground.jpg") top center no-repeat;}
@@ -57,8 +59,9 @@ div.meetgate div.event div.main div.content.talks{width: 100%; box-shadow: 2px 2
 div.meetgate div.event div.main div.content.talks .talks-back{text-align: center;}
 div.meetgate div.event div.main div.content.talks .talks-back .talks-row{margin: 20px auto; background-color: #ffffff; width: 90%; text-align: left; border-radius: 10px 0 10px 0;}
 div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-hr{background-color: #e8e8e8; width: 80%; margin-left: 20px;}
-div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-title{text-transform: uppercase; line-height: 50px; font-size: 27px;}
-div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-rate{color: #ffc332; font-weight: bold; font-size: 40px;}
+div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-title{text-transform: uppercase; line-height: 20px;}
+div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-title h2{margin: 10px;}
+div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-rate{color: #ffc332; font-weight: bold; font-size: 15px; line-height: 45px;}
 div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-desc{min-height: 100px;}
 div.meetgate div.event div.main div.content.talks .talks-back .talks-row .talk-author{}
 

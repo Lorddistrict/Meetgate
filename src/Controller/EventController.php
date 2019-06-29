@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Rate;
 use App\Entity\Talk;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,12 +44,16 @@ class EventController extends AbstractController
         /** @var EventRepository $eventRepository */
         $eventRepository = $doctrine->getRepository(Event::class);
         $talkRepository = $doctrine->getRepository(Talk::class);
+        $rateRepository = $doctrine->getRepository(Rate::class);
 
         /** @var Event $event */
         $event = $eventRepository->findOneBy(['id' => $event->getId()]);
 
-        /** @var Talk[] $talks */
-        $talks = $talkRepository->findBy(['event' => $event->getId()]);
+        /** @var Talk $talks */
+        $talks = $talkRepository->findBy(
+            ['event' => $event->getId()],
+            ['id' => 'ASC']
+        );
 
         $reserved = $event->getUser()->count();
 
