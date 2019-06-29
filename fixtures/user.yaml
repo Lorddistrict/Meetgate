@@ -1,5 +1,5 @@
 App\Entity\User:
-  user-{1..100}:
+  user-{1..50}:
     __construct: false
     email (unique): '<email()>'
     name: '<name()>'

@@ -1,0 +1,11 @@
+register:
+  path: /register
+  controller: App\Controller\UserController::register
+
+confirm:
+  path: /confirm/{token}
+  controller: App\Controller\UserController::confirm
+
+password:
+  path: /password
+  controller: App\Controller\UserController::password

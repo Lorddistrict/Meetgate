@@ -4,6 +4,37 @@
 
 {% block body %}
 
-    div.container
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">{{ talk.id }}</div>
+            <hr>
+            <div class="col-md-12">{{ talk.title }}</div>
+            <hr>
+            <div class="col-md-12">{{ talk.description }}</div>
+            <hr>
+            <div class="col-md-12">Note : {{ rate }}/5</div>
+            <div class="col-md-12">
+                <div class='starrr'></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.starrr').starrr({
+                rating: 3
+            });
+            $('#star1').starrr({
+                change: function(e, value){
+                    if (value) {
+                        $('.your-choice-was').show();
+                        $('.choice').text(value);
+                    } else {
+                        $('.your-choice-was').hide();
+                    }
+                }
+            });
+        });
+    </script>
 
 {% endblock %}

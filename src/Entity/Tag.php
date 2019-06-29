@@ -26,11 +26,11 @@ class Tag
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="tags")
      */
-    private $events;
+    private $event;
 
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+        $this->event = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,20 +55,20 @@ class Tag
      */
     public function getEvent(): Collection
     {
-        return $this->events;
+        return $this->event;
     }
     public function addEvent(Event $event): self
     {
-        if (!$this->events->contains($event)) {
-            $this->events[] = $event;
+        if (!$this->event->contains($event)) {
+            $this->event[] = $event;
         }
 
         return $this;
     }
     public function removeEvent(Event $event): self
     {
-        if ($this->events->contains($event)) {
-            $this->events->removeElement($event);
+        if ($this->event->contains($event)) {
+            $this->event->removeElement($event);
         }
 
         return $this;

@@ -58,7 +58,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="author")
      */
-    private $userTalks;
+    private $talks;
 
     /**
      * @var string
@@ -68,14 +68,22 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="user")
      */
     private $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rate", mappedBy="user")
+     */
+    private $rates;
+
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->rates = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -87,13 +95,13 @@ class User implements UserInterface
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -133,7 +141,6 @@ class User implements UserInterface
     {
         return (string)$this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -165,7 +172,6 @@ class User implements UserInterface
     {
         return $this->name;
     }
-
     public function setName($name)
     {
         $this->name = $name;
@@ -176,7 +182,6 @@ class User implements UserInterface
     {
         return $this->firstname;
     }
-
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -187,7 +192,6 @@ class User implements UserInterface
     {
         return $this->certifiedToken;
     }
-
     public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
@@ -198,22 +202,21 @@ class User implements UserInterface
     {
         return $this->isCertified;
     }
-
     public function setIsCertified($isCertified)
     {
         $this->isCertified = $isCertified;
     }
 
 
-    public function getUserTalks()
+    public function getTalks()
     {
-        return $this->userTalks;
+        return $this->talks;
+    }
+    public function setTalks($talks): void
+    {
+        $this->talks = $talks;
     }
 
-    public function setUserTalks($userTalks): void
-    {
-        $this->userTalks = $userTalks;
-    }
 
     /**
      * @return Collection|Event[]
@@ -236,6 +239,37 @@ class User implements UserInterface
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
             $event->removeUser($this);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Rate[]
+     */
+    public function getRates(): Collection
+    {
+        return $this->rates;
+    }
+
+    public function addRate(Rate $rate): self
+    {
+        if (!$this->rates->contains($rate)) {
+            $this->rates[] = $rate;
+            $rate->setUser($this);
+        }
+
+        return $this;
+    }
+    public function removeRate(Rate $rate): self
+    {
+        if ($this->rates->contains($rate)) {
+            $this->rates->removeElement($rate);
+            // set the owning side to null (unless already changed)
+            if ($rate->getUser() === $this) {
+                $rate->setUser(null);
+            }
         }
 
         return $this;

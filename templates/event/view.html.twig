@@ -79,16 +79,26 @@
                     </div>
                 </div>
 
-                <div class="content rs">
+                <div class="content talks">
                     <div class="row">
 
                         {% for talk in talks %}
 
-                            <div class="col-md-6" style="background-color: lightgreen; text-align: center;">
-                                <div class="row" style="margin: 0 auto; background-color: lightgrey; width: 90%;">
-                                    <div class="col-md-12">{{ talk.title }}</div>
-                                    <div class="col-md-12">{{ talk.description }}</div>
-                                    <div class="col-md-12">
+                            <div class="col-md-6 talks-back">
+                                <div class="row talks-row">
+                                    <div class="col-md-10 talk-title">
+                                        <a href="{{ url('view', { id: talk.id } ) }}">
+                                            {{ talk.title }}
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 talk-rate">
+                                        *****
+                                    </div>
+                                    <hr class="talk-hr">
+                                    <div class="col-md-12 talk-desc">{{ talk.description }}</div>
+                                    <hr class="talk-hr">
+                                    <div class="col-md-12 talk-author">
+                                        Talk animated by&nbsp;
                                         <a href="{{ url('user', { id: talk.author.id } ) }}">
                                             {{ talk.author.name|capitalize }}&nbsp;
                                             {{ talk.author.firstname }}

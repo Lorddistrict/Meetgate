@@ -24,14 +24,10 @@ login:
     path: /login
     controller: App\Controller\UserController::login
 
-register:
-    path: /register
-    controller: App\Controller\UserController::register
-
-confirm:
-    path: /register/confirm/{token}
-    controller: App\Controller\UserController::confirm
-
 logout:
     path: /logout
     controller: App\Controller\UserController::logout
+
+account:
+    resource: routes/account.yaml
+    prefix: /account

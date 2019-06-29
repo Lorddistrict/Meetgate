@@ -1,0 +1,31 @@
+{% extends 'default/base.html.twig' %}
+
+{% block title %}Confirm{% endblock %}
+
+{% block body %}
+
+  <div class="container">
+    <div class="limiter">
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <div class="login100-form-title" style="background-image: url({{ asset('images/bg-01.jpg') }});">
+            <span class="login100-form-title-1">Confirmation</span>
+          </div>
+          <div class="row">
+            <div class="offset-1 col-md-11" style="margin: 30px auto;">
+              <p>
+                We sent an e-mail to the following address : <span class="email" style="color: dodgerblue;">{{ email }}</span>
+                with an activation code. Please click on it to validate your account.<br>
+                Once you clicked, please follow the "log me" link to access the login page :
+                <a href="{{ url('login') }}">Log me</a>
+              </p>
+              <br>
+              ~ MeetGate Team ~
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

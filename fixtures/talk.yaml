@@ -1,7 +1,7 @@
 App\Entity\Talk:
-  talk-{1..20}:
+  talk-{1..150}:
     __construct: false
     title: '<word()>'
     description: '<paragraph(3, true)>'
-    author: '@user-<numberBetween(1,100)>'
-    event: '@event-<numberBetween(1,5)>'
+    author: '@user-<numberBetween(1,50)>'
+    event: '@event-<numberBetween(1,10)>'

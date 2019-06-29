@@ -51,10 +51,10 @@ class Event
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="event")
      */
-    private $eventTalks;
+    private $talks;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="events")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="event")
      */
     private $tags;
 
@@ -71,12 +71,12 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="events")
      */
-    private $users;
+    private $user;
 
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->users = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
 
@@ -129,13 +129,13 @@ class Event
     }
 
 
-    public function getEventTalks()
+    public function getTalks()
     {
-        return $this->eventTalks;
+        return $this->talks;
     }
-    public function setEventTalks($eventTalks): self
+    public function setTalks($talks): self
     {
-        $this->eventTalks = $eventTalks;
+        $this->talks = $talks;
         return $this;
     }
 
@@ -210,20 +210,20 @@ class Event
      */
     public function getUser(): Collection
     {
-        return $this->users;
+        return $this->user;
     }
     public function addUser(User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
         }
 
         return $this;
     }
     public function removeUser(User $user): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
         }
 
         return $this;

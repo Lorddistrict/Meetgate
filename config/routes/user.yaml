@@ -3,5 +3,5 @@ users:
   controller: App\Controller\UserController::users
 
 user:
-  path: /user/{id}
+  path: /{id}
   controller: App\Controller\UserController::view
