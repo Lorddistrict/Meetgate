@@ -68,20 +68,20 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="user")
-     */
-    private $events;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Rate", mappedBy="user")
      */
     private $rates;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="user")
+     */
+    private $participations;
+
 
     public function __construct()
     {
-        $this->events = new ArrayCollection();
         $this->rates = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
 
@@ -219,40 +219,12 @@ class User implements UserInterface
 
 
     /**
-     * @return Collection|Event[]
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-    public function addEvent(Event $event): self
-    {
-        if (!$this->events->contains($event)) {
-            $this->events[] = $event;
-            $event->addUser($this);
-        }
-
-        return $this;
-    }
-    public function removeEvent(Event $event): self
-    {
-        if ($this->events->contains($event)) {
-            $this->events->removeElement($event);
-            $event->removeUser($this);
-        }
-
-        return $this;
-    }
-
-
-    /**
      * @return Collection|Rate[]
      */
     public function getRates(): Collection
     {
         return $this->rates;
     }
-
     public function addRate(Rate $rate): self
     {
         if (!$this->rates->contains($rate)) {
@@ -269,6 +241,35 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($rate->getUser() === $this) {
                 $rate->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setUser($this);
+        }
+
+        return $this;
+    }
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getUser() === $this) {
+                $participation->setUser(null);
             }
         }
 

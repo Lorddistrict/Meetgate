@@ -68,15 +68,16 @@ class Event
      */
     private $places;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="events")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="event")
      */
-    private $user;
+    private $participations;
 
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->user = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
 
@@ -205,25 +206,31 @@ class Event
         return $this;
     }
 
+
     /**
-     * @return Collection|User[]
+     * @return Collection|Participation[]
      */
-    public function getUser(): Collection
+    public function getParticipations(): Collection
     {
-        return $this->user;
+        return $this->participations;
     }
-    public function addUser(User $user): self
+    public function addParticipation(Participation $participation): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setEvent($this);
         }
 
         return $this;
     }
-    public function removeUser(User $user): self
+    public function removeParticipation(Participation $participation): self
     {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getEvent() === $this) {
+                $participation->setEvent(null);
+            }
         }
 
         return $this;

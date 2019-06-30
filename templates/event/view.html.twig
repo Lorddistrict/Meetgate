@@ -8,7 +8,21 @@
         <div class="container-fluid event">
             <div class="main">
 
+
                 <div class="content intro">
+
+                    {% if participation is defined and participation == true %}
+
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <h4 class="alert-heading">Success !</h4>
+                        <p class="mb-0">
+                            Your participation has been registered, <a href="#" class="alert-link">click here</a> to check all your events.
+                        </p>
+                    </div>
+
+                    {% endif %}
+
                     <div class="row font first">
                         <div class="col-md-5 display">
                             <img src="{{ event.picture }}" alt="{{ event.picture }}">
@@ -69,6 +83,13 @@
                                         <small class="ban">You have to be connected to participate</small><br>
                                         <button class="btn btn-success not-allowed" disabled>
                                             <i class="fas fa-ban"></i>&nbsp;Je participe
+                                        </button>
+
+                                        {% elseif participation == true %}
+
+                                        <small class="success">You're already registered</small><br>
+                                        <button class="btn btn-success not-allowed" disabled>
+                                            <i class="fas fa-check"></i>&nbsp;Je participe
                                         </button>
 
                                         {% else %}

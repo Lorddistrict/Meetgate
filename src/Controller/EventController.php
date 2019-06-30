@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Participation;
 use App\Entity\Rate;
 use App\Entity\Talk;
+use App\Entity\User;
 use App\Repository\EventRepository;
+use App\Repository\ParticipationRepository;
 use App\Repository\RateRepository;
 use App\Repository\TalkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,28 +48,47 @@ class EventController extends AbstractController
 
         /** @var EventRepository $eventRepository */
         $eventRepository = $doctrine->getRepository(Event::class);
+
         /** @var TalkRepository $talkRepository */
         $talkRepository = $doctrine->getRepository(Talk::class);
+
         /** @var RateRepository $rateRepository */
         $rateRepository = $doctrine->getRepository(Rate::class);
+
+        /** @var ParticipationRepository $participationRepository */
+        $participationRepository = $doctrine->getRepository(Participation::class);
 
         /** @var Event $event */
         $event = $eventRepository->findOneBy(['id' => $event->getId()]);
 
-        /** @var Talk $talks */
-//        $talks = $talkRepository->findBy(
-//            ['event' => $event->getId()],
-//            ['id' => 'ASC']
-//        );
-        $talks = $talkRepository->getTalksByRate($event->getId());
-//        dd($talks);
+        /** @var User $user */
+        $user = $this->getUser();
 
-        $reserved = $event->getUser()->count();
+        /** @var Talk $talks */
+        $talks = $talkRepository->getTalksByRate($event->getId());
+
+        /** @var Participation $participations */
+        $participations = $participationRepository->findAll();
+        $reserved = count($participations);
+
+        $currentUserParticipation = $participationRepository->findBy(['user' => $user->getId()]);
+
+        if( empty($currentUserParticipation) ){
+
+            return $this->render('event/view.html.twig', [
+                'event' => $event,
+                'reserved' => $reserved,
+                'talks' => $talks,
+                'participation' => false,
+            ]);
+
+        }
 
         return $this->render('event/view.html.twig', [
             'event' => $event,
             'reserved' => $reserved,
             'talks' => $talks,
+            'participation' => true,
         ]);
     }
 
@@ -74,11 +96,36 @@ class EventController extends AbstractController
     public function join(Request $request, Event $event) : Response
     {
         $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
 
         /** @var EventRepository $eventRepository */
         $eventRepository = $doctrine->getRepository(Event::class);
 
+        /** @var ParticipationRepository $participationRepository */
+        $participationRepository = $doctrine->getRepository(Participation::class);
+
         /** @var Event $event */
         $event = $eventRepository->find($event->getId());
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        /** @var Participation $participation */
+        // Try to find if the one logged has already a participation
+        $participation = $participationRepository->findBy(['event' => $event->getId(), 'user' => $user->getId()]);
+
+        if( empty($participation) ) {
+
+            /** @var Participation $participation */
+            $participation = new Participation();
+
+            $participation->setEvent($event);
+            $participation->setUser($user);
+            $em->persist($participation);
+            $em->flush();
+        }
+        return $this->redirectToRoute('event', [
+            'id' => $event->getId(),
+        ]);
     }
 }
