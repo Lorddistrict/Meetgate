@@ -6,11 +6,14 @@
 **Table of Contents**
 
 **[Docker](#docker)**<br>
+**[Start](#start)**<br>
+**[Files](#files)**<br>
 **[Git](#git)**<br>
 **[Command](#command)**<br>
 **[Makefile](#makefile)**<br>
 **[Commands available](#commands-available)**<br>
 **[CircleCI](#circleci)**<br>
+**[Mailhog](#mailhog)**<br>
 **[Errors](#errors)**<br>
 **[Required](#required)**<br>
 **[How does it works ?](#how-the-project-works-?)**<br>
@@ -21,8 +24,22 @@
 
 ## Docker
 
+### Start
 To start the project you need to have <abbr title="https://docs.docker.com/install/">docker</abbr>, <abbr title="https://docs.docker.com/compose/install/">docker-compose</abbr> and <abbr title="https://getcomposer.org/">composer</abbr> installed.
 However you can clone and edit the **docker-compose** file in order running your own containers.
+
+### Files
+The project needs you to create :
+**.env.local**
+**docker-compose.override.yml**
+
+Copy the content of **.env** and **docker-compose.override.yml.dist** and past it into the files you created.
+Complete the ports into **docker-compose.override.yml**.
+Complete your local environment with **.env.local**.
+
+We advice you to keep **dev** environment to avoid missing config :p
+I don't know if the name is important. **app** is the name i have chosen. Keep it in mind :)
+
 
 ## Git
 ### Command
@@ -58,6 +75,15 @@ However you can clone and edit the **docker-compose** file in order running your
 
 We put CircleCI on the project with 6/7 difficulty.
 **App\src\Migrations** are **ignored** because of their length.
+
+
+----
+
+## Mailhog
+
+Mailhog is link to the project. 
+You can access it with the port I defined (sorry for you) wich is **8025**.
+(ex: localhost:8025)
 
 
 ----
