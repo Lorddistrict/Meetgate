@@ -14,13 +14,17 @@
 
 To start the project you need to have <abbr title="https://docs.docker.com/install/">docker</abbr>, <abbr title="https://docs.docker.com/compose/install/">docker-compose</abbr> and <abbr title="https://getcomposer.org/">composer</abbr> installed.
 However you can clone and edit the **docker-compose** file in order running your own containers.
+
 ##Git
+
 ###Command
 
 `$ git clone https://github.com/Lorddistrict/Meetgate.git`
 
 ----
+
 ##Makefile
+
 ###Commands available
 
 **Start the project & all containers**
@@ -38,7 +42,9 @@ However you can clone and edit the **docker-compose** file in order running your
 **Start code checking with <abbr title="https://github.com/squizlabs/PHP_CodeSniffer">phpcs</abbr>**
 
 `make testF`
+
 ----
+
 ##CircleCI
 
 [![CircleCI](https://circleci.com/gh/Lorddistrict/Meetgate.svg?style=svg)](https://circleci.com/gh/Lorddistrict/Meetgate) 
@@ -48,6 +54,7 @@ We put CircleCI on the project with 6/7 difficulty.
 
 
 ----
+
 ##Errors
 
 Our Symfony level is around 30, we're still farming gobelins & wolfs apologies.
@@ -108,6 +115,7 @@ See ya'
 Lorddistrict
 
 ----
+
 **Project by**
 Etienne Crespi
 Arthur Djikpo
