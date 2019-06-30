@@ -1,0 +1,82 @@
+{% extends 'default/base.html.twig' %}
+
+{% block title %}Talk{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">id : {{ talk.id }}</div>
+            <hr>
+            <div class="col-md-12">title : {{ talk.title }}</div>
+            <hr>
+            <div class="col-md-12">desc : {{ talk.description }}</div>
+            <hr>
+            <div class="col-md-12">rate : {{ rate }}/5</div>
+            <div class="col-md-12">
+                <div class='starrr'></div>
+            </div>
+
+            {% if app.user != null %}
+
+                {% if allowRate is defined and allowRate == false %}
+
+                <div class="col-md-12">
+                    <small>You already rated {{ starsGivenCurrentTalk }}* this talk :p</small>
+                </div>
+
+                {% endif %}
+
+            {% else %}
+
+                <div class="col-md-12">
+                    <small class="ban">You have to be connected if you want to rate this talk</small>
+                </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+            {% if allowRate is defined and allowRate == true %}
+
+            $('.starrr').starrr({
+                rating: {{ rate }},
+            });
+
+            $('.starrr').on('starrr:change', function(e, value){
+                if (value) {
+                    var valid = confirm('Are you sure you want to rate ' + value + '* ?');
+                    if(valid){
+                        $.ajax({
+                            url: '{{ url('rate') }}',
+                            type: 'POST',
+                            data: 'rate=' + value + '&talk=' + {{ talk.id }},
+                            success: function(data){
+                                if(data){
+                                    document.location.reload(true);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    console.log('An error as occured');
+                }
+            });
+
+            {% else %}
+
+            $('.starrr').starrr({
+                rating: {{ rate }},
+                readOnly: true,
+            });
+
+            {% endif %}
+
+        });
+    </script>
+
+{% endblock %}

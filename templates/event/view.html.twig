@@ -1,0 +1,252 @@
+{% extends 'default/base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+
+    <div class="meetgate">
+        <div class="container-fluid event">
+            <div class="main">
+                <div class="content intro">
+                    <div class="row font first">
+                        {% if participation is defined and participation == true %}
+
+                            <div class="col-md-12 alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h4 class="alert-heading">Success !</h4>
+                                <p class="mb-0">
+                                    Your participation has been registered, <a href="#" class="alert-link">click here</a> to check all your events.
+                                </p>
+                            </div>
+
+                        {% endif %}
+                        <div class="col-md-5 display">
+                            <img src="{{ event.picture }}" alt="{{ event.picture }}">
+                        </div>
+                        <div class="col-md-7 aside">
+                            <h1>{{ event.title }}</h1>
+                            <hr>
+                            <div class="desc">
+                                <p>
+                                    {{ event.description }}
+                                </p>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Date : </strong>{{ event.dateEvent|date('l d F Y') }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Duration : </strong>
+                                        {{ (event.duration > 1) ? event.duration ~ ' days' : event.duration ~ ' day' }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Price : </strong>
+                                        <span class="price">{{ (event.price > 0) ? '$' ~ event.price : 'Free' }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Tags : </strong>
+                                        {% for tag in event.tags %}
+                                            <a href="{{ url('tag', { id: tag.id }) }}" class="tag-link">
+                                                <span class="badge badge-pill badge-success">{{ tag.name }}</span>&nbsp;
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Adress : </strong>
+                                        {{ event.adress }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>Members : </strong>
+                                        {{ reserved }}/{{ event.places }}
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        {% if app.user == null and canParticipate == false %}
+
+                                        <small class="ban">You have to be connected to participate</small><br>
+                                        <button class="btn btn-success not-allowed" disabled>
+                                            <i class="fas fa-ban"></i>&nbsp;Participate
+                                        </button>
+
+                                        {% elseif app.user != null and canParticipate == false %}
+
+                                        <small class="success">You're already registered</small><br>
+                                        <button class="btn btn-success not-allowed" disabled>
+                                            <i class="fas fa-check"></i>&nbsp;Participate
+                                        </button>
+
+                                        {% else %}
+
+                                        <a href="{{ url('join', { id: event.id } ) }}" class="btn btn-success">Participate</a>
+
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row no-margin">
+                        <div class="offset-1 col-md-10 info-map">
+                            <div class="alert alert-dismissible alert-info">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h4 class="alert-heading"><i class="fas fa-info"></i>&nbsp;Info !</h4>
+                                <p class="mb-0">
+                                    Sorry, we're using fake data with Faker. In case the location doesn't exists at all, the map will not display
+                                    anything. Note that the event with id 1 has a correct adress :) Thank you
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content map">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id='map' style='width: 100%; min-height: 550px; height: 100%;'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content talks">
+                    <div class="row no-margin">
+
+                        {% for talk in talks %}
+
+                            {% set cumulatedRates = 0 %}
+
+                            <div class="col-md-6 talks-back">
+                                <div class="row talks-row">
+                                    <div class="col-md-10 talk-title">
+                                        <a href="{{ url('talk', { id: talk[0].id } ) }}">
+                                            <h2>{{ talk[0].title }}</h2>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 talk-rate">
+
+                                        {% for rate in talk[0].rates %}
+                                            {% set cumulatedRates = cumulatedRates + rate.stars %}
+                                        {% endfor %}
+
+                                        {% if talk[0].rates|length != 0 %}
+                                            {% set stars = cumulatedRates / talk[0].rates|length %}
+
+                                            {% for iter in 1..stars %}
+                                                <i class="fas fa-star"></i>
+                                            {% endfor %}
+
+                                            {% if stars != 5 %}
+                                                {% for iter in stars+1..5 %}
+                                                    <i class="far fa-star"></i>
+                                                {% endfor %}
+                                            {% endif %}
+
+                                        {% else %}
+
+                                            {% for iter in 1..5 %}
+                                                <i class="far fa-star"></i>
+                                            {% endfor %}
+
+                                        {% endif %}
+
+                                    </div>
+                                    <hr class="talk-hr">
+                                    <div class="col-md-12 talk-desc">{{ talk[0].description }}</div>
+                                    <hr class="talk-hr">
+                                    <div class="col-md-12 talk-author">
+                                        Talk animated by&nbsp;
+                                        <a href="{{ url('user', { id: talk[0].author.id } ) }}">
+                                            {{ talk[0].author.name|capitalize }}&nbsp;
+                                            {{ talk[0].author.firstname }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+{#                <div class="content">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12">#}
+{#                            <strong>LATITUDE : </strong><span id="lat"></span><br>#}
+{#                            <strong>LONGITUDE : </strong><span id="lon"></span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+
+            // $.get("https://nominatim.openstreetmap.org/search/" + "367 rue de Crespy" + "?format=json",
+            $.get("https://nominatim.openstreetmap.org/search/" + "{{ event.adress }}" + "?format=json",
+                function (data) {
+
+                    console.log(data[0]);
+
+                    $('#lat').append(data[0].lat);
+                    $('#lon').append(data[0].lon);
+
+                    var map = L.map('map');
+                    map.setView([ data[0].lat, data[0].lon ], 15);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    L.marker([ data[0].lat, data[0].lon ]).addTo(map).bindPopup('{{ event.adress }}').openPopup();
+                }
+            );
+
+            $(document).ready(function(){
+                $('.starrr').starrr({
+                    rating: 3
+                });
+                $('#star1').starrr({
+                    change: function(e, value){
+                        if (value) {
+                            $('.your-choice-was').show();
+                            $('.choice').text(value);
+                        } else {
+                            $('.your-choice-was').hide();
+                        }
+                    }
+                });
+            });
+
+
+        });
+
+    </script>
+
+    <script type="application/javascript">
+        $(document).ready(function(){
+           $('span.badge').hover(function(){
+               $(this).toggleClass('badge-success');
+               $(this).toggleClass('badge-warning');
+           });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+<h3 style="font-size: 30px; color: darkblue;">Hello {{ firstname }} !</h3>
+
+<div>
+    <font style="color: #333333;">
+        Welcome to MeetGate,<br/>
+        To end your registration, click to following link. You'll be able to access all the website :)<br/>
+    </font>
+</div>
+
+<br/><hr><br/>
+
+<a href="{{ url('confirm', { token: certified_token } ) }}"
+   style="display: inline-block; background-color: darkblue; color: white; padding: 10px 20px; text-decoration: none;">Validate my account</a>.<br/><br/>
+
+<div>
+    <font style="color: #333333;">
+        Thank you and have fun !<br/><br/>
+        <span style="color: orangered; font-weight: bold;">~ MeetGate Team ~</span>
+    </font>
+</div>

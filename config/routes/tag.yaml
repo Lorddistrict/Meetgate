@@ -1,0 +1,7 @@
+tags:
+  path: /tags
+  controller: App\Controller\TagController::tags
+
+tag:
+  path: /{id}
+  controller: App\Controller\TagController::view

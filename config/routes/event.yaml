@@ -1,0 +1,17 @@
+event:
+  path: /{id}
+  controller: 'App\Controller\EventController::view'
+  requirements:
+    id: \d+|id
+
+search:
+  path: /search
+  controller: 'App\Controller\AjaxController::searchBarAjax'
+
+search_event:
+  path: /search_event
+  controller: 'App\Controller\AjaxController::searchByEventName'
+
+join:
+  path: /join/{id}
+  controller: 'App\Controller\EventController::join'
