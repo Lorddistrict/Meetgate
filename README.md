@@ -69,6 +69,33 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
 
 ----
 
+##Required
+
+- [ ] Back-Office
+  - [ ] Admin
+    - [ ] Talks - Management
+    - [ ] Talks - Top 10
+    - [ ] User - Management
+ - [ ] Email
+    - [x] Install Mailhog
+    - [ ] Send a mail to members
+- [ ] Front-Office
+  - [x] Registration for users
+  - [x]Rate (1 to 5\*)
+  - [ ] Fetch unrated Talks
+  - [ ] Fetch rated Talks
+  - [x] Research events by title
+  - [x] Pagination
+- [x] Bonus
+  - [x] Use Pull-Request
+  - [x] Code review
+  - [x] Use quality tools like **Codacy** or **CircleCI**
+- [x] Do the best README as possible ;)
+- [x] Use Docker
+- [x] Project available on github
+
+----
+
 ##How the project works ?
 
 This project has been created to increase the ease for users creating events, those who want to teach others and those who want to learn something.
