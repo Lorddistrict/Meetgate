@@ -24,7 +24,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="tags")
      */
     private $event;
 
@@ -72,5 +72,11 @@ class Tag
         }
 
         return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

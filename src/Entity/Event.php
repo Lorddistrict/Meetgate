@@ -29,6 +29,11 @@ class Event
     private $dateEvent;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -54,7 +59,7 @@ class Event
     private $talks;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="event")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="event")
      */
     private $tags;
 
@@ -105,6 +110,17 @@ class Event
     public function setDateEvent(\DateTimeInterface $dateEvent): self
     {
         $this->dateEvent = $dateEvent;
+        return $this;
+    }
+
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
         return $this;
     }
 

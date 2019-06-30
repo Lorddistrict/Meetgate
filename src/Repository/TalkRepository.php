@@ -34,4 +34,14 @@ class TalkRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getLastFiveTalks()
+    {
+        return $this->createQueryBuilder('t')
+            ->setMaxResults(5)
+            ->orderBy('t.created', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

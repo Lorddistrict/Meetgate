@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <strong>Price : </strong>
-                                        <span class="price">{{ (event.price > 0) ? '$' ~ event.price : 'Gratuit' }}</span>
+                                        <span class="price">{{ (event.price > 0) ? '$' ~ event.price : 'Free' }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,6 +101,20 @@
                     </div>
                 </div>
 
+                <div class="col-md-12">
+                    <div class="row no-margin">
+                        <div class="offset-1 col-md-10 info-map">
+                            <div class="alert alert-dismissible alert-info">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h4 class="alert-heading"><i class="fas fa-info"></i>&nbsp;Info !</h4>
+                                <p class="mb-0">
+                                    Sorry, we're using fake data with Faker. In case the location doesn't exists at all, the map will not display
+                                    anything. Note that the event with id 1 has a correct adress :) Thank you
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="content map">
                     <div class="row">
                         <div class="col-md-12">
@@ -168,14 +182,14 @@
                     </div>
                 </div>
 
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <strong>LATITUDE : </strong><span id="lat"></span><br>
-                            <strong>LONGITUDE : </strong><span id="lon"></span>
-                        </div>
-                    </div>
-                </div>
+{#                <div class="content">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12">#}
+{#                            <strong>LATITUDE : </strong><span id="lat"></span><br>#}
+{#                            <strong>LONGITUDE : </strong><span id="lon"></span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
             </div>
         </div>
@@ -186,7 +200,7 @@
         $(document).ready(function () {
 
             // $.get("https://nominatim.openstreetmap.org/search/" + "367 rue de Crespy" + "?format=json",
-            $.get("https://nominatim.openstreetmap.org/search/" + "rue des allees" + "?format=json",
+            $.get("https://nominatim.openstreetmap.org/search/" + "{{ event.adress }}" + "?format=json",
                 function (data) {
 
                     console.log(data[0]);

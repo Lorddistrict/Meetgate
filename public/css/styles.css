@@ -9,6 +9,8 @@ small.ban{color: red;}
 button.not-allowed:hover{cursor: not-allowed;}
 .pagination span{font-size: 20px; padding: 0 10px;}
 .pagination a{font-size: 20px; padding: 0 10px;}
+.form-spacer label{margin: 0 15px 0 5px!important;}
+.info-map{margin-top: 20px;}
 
 
 

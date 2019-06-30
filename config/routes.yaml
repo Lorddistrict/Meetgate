@@ -22,6 +22,10 @@ rate:
     resource: routes/rate.yaml
     prefix: /rate
 
+admin:
+    resource: routes/admin.yaml
+    prefix: /admin
+
 # Connexions
 
 login:

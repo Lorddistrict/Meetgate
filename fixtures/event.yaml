@@ -1,12 +1,24 @@
 App\Entity\Event:
+  event-etienne:
+    __construct: false
+    title (unique): 'DarkMira Tour'
+    dateEvent: "<dateTimeBetween('5 days', '1 year')>"
+    created: "<dateTimeBetween('1 year ago', 'now')>"
+    description: 'Beatiful event at BRAZIIIILIA'
+    picture: '<imageUrl(640, 480)>'
+    duration: '7'
+    price: '0'
+    adress: '82 Rue Frédéric Chopin'
+    places: '100'
+
   event-{1..10}:
     __construct: false
     title (unique): '<word()>'
-    dateEvent: "<dateTimeBetween('2 year ago', 'now')>"
+    dateEvent: "<dateTimeBetween('5 days', '1 year')>"
+    created: "<dateTimeBetween('1 year ago', 'now')>"
     description: '<paragraph(10, true)>'
     picture: '<imageUrl(640, 480)>'
     duration: '<numberBetween(1, 7)>'
     price: '<randomFloat(2, 0, 50)>'
     adress: '<streetAddress()>'
     places: '<numberBetween(50, 250)>'
-    tags: '@tag-<numberBetween(1,10)>'
