@@ -7,6 +7,11 @@ a.tag-link,
 a.tag-link:hover{text-decoration: none;}
 small.ban{color: red;}
 button.not-allowed:hover{cursor: not-allowed;}
+.pagination span{font-size: 20px; padding: 0 10px;}
+.pagination a{font-size: 20px; padding: 0 10px;}
+
+
+
 div.meetgate {position: relative; display: inline-block; max-width: 1920px; width: 100%; max-height: 1080px; height: 100%;}
 div.meetgate div.container-fluid{padding: 0;}
 div.meetgate div.container-fluid div.intro{background: url("../img/mainBackground.jpg") top center no-repeat;}

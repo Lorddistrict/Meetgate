@@ -61,34 +61,42 @@ class EventController extends AbstractController
         /** @var Event $event */
         $event = $eventRepository->findOneBy(['id' => $event->getId()]);
 
-        /** @var User $user */
-        $user = $this->getUser();
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
 
         /** @var Talk $talks */
         $talks = $talkRepository->getTalksByRate($event->getId());
 
         /** @var Participation $participations */
-        $participations = $participationRepository->findAll();
+        $participations = $participationRepository->findBy([
+            'event' => $event->getId(),
+        ]);
         $reserved = count($participations);
 
-        $currentUserParticipation = $participationRepository->findBy(['user' => $user->getId()]);
+        if( !empty($currentUser) ){
 
-        if( empty($currentUserParticipation) ){
-
-            return $this->render('event/view.html.twig', [
-                'event' => $event,
-                'reserved' => $reserved,
-                'talks' => $talks,
-                'participation' => false,
+            $currentUserParticipation = $participationRepository->findBy([
+                'user' => $currentUser->getId(),
+                'event' => $event->getId(),
             ]);
 
+            if( empty($currentUserParticipation) ){
+
+                return $this->render('event/view.html.twig', [
+                    'event' => $event,
+                    'reserved' => $reserved,
+                    'talks' => $talks,
+                    'canParticipate' => true,
+                ]);
+
+            }
         }
 
         return $this->render('event/view.html.twig', [
             'event' => $event,
             'reserved' => $reserved,
             'talks' => $talks,
-            'participation' => true,
+            'canParticipate' => false,
         ]);
     }
 
@@ -107,12 +115,15 @@ class EventController extends AbstractController
         /** @var Event $event */
         $event = $eventRepository->find($event->getId());
 
-        /** @var User $user */
-        $user = $this->getUser();
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
 
         /** @var Participation $participation */
         // Try to find if the one logged has already a participation
-        $participation = $participationRepository->findBy(['event' => $event->getId(), 'user' => $user->getId()]);
+        $participation = $participationRepository->findBy([
+            'event' => $event->getId(),
+            'user' => $currentUser->getId()
+        ]);
 
         if( empty($participation) ) {
 
@@ -120,7 +131,7 @@ class EventController extends AbstractController
             $participation = new Participation();
 
             $participation->setEvent($event);
-            $participation->setUser($user);
+            $participation->setUser($currentUser);
             $em->persist($participation);
             $em->flush();
         }

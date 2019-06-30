@@ -9,3 +9,4 @@ App\Entity\Event:
     price: '<randomFloat(2, 0, 50)>'
     adress: '<streetAddress()>'
     places: '<numberBetween(50, 250)>'
+    tags: '@tag-<numberBetween(1,10)>'

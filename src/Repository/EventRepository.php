@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -20,16 +21,12 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Event[] Returns an array of Event objects
+     * @return Query
      */
-    public function getNextEvents()
+    public function findHomeEventsQuery() : Query
     {
         return $this->createQueryBuilder('e')
-            ->orderBy('e.dateEvent', 'DESC')
-            ->setMaxResults(6)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->getQuery();
     }
 
     /*

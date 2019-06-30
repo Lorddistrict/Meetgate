@@ -7,23 +7,19 @@
     <div class="meetgate">
         <div class="container-fluid event">
             <div class="main">
-
-
                 <div class="content intro">
-
-                    {% if participation is defined and participation == true %}
-
-                    <div class="alert alert-dismissible alert-success">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <h4 class="alert-heading">Success !</h4>
-                        <p class="mb-0">
-                            Your participation has been registered, <a href="#" class="alert-link">click here</a> to check all your events.
-                        </p>
-                    </div>
-
-                    {% endif %}
-
                     <div class="row font first">
+                        {% if participation is defined and participation == true %}
+
+                            <div class="col-md-12 alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h4 class="alert-heading">Success !</h4>
+                                <p class="mb-0">
+                                    Your participation has been registered, <a href="#" class="alert-link">click here</a> to check all your events.
+                                </p>
+                            </div>
+
+                        {% endif %}
                         <div class="col-md-5 display">
                             <img src="{{ event.picture }}" alt="{{ event.picture }}">
                         </div>
@@ -78,23 +74,23 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        {% if app.user == null %}
+                                        {% if app.user == null and canParticipate == false %}
 
                                         <small class="ban">You have to be connected to participate</small><br>
                                         <button class="btn btn-success not-allowed" disabled>
-                                            <i class="fas fa-ban"></i>&nbsp;Je participe
+                                            <i class="fas fa-ban"></i>&nbsp;Participate
                                         </button>
 
-                                        {% elseif participation == true %}
+                                        {% elseif app.user != null and canParticipate == false %}
 
                                         <small class="success">You're already registered</small><br>
                                         <button class="btn btn-success not-allowed" disabled>
-                                            <i class="fas fa-check"></i>&nbsp;Je participe
+                                            <i class="fas fa-check"></i>&nbsp;Participate
                                         </button>
 
                                         {% else %}
 
-                                        <a href="{{ url('join', { id: event.id } ) }}" class="btn btn-success">Je participe</a>
+                                        <a href="{{ url('join', { id: event.id } ) }}" class="btn btn-success">Participate</a>
 
                                         {% endif %}
 
@@ -123,7 +119,7 @@
                             <div class="col-md-6 talks-back">
                                 <div class="row talks-row">
                                     <div class="col-md-10 talk-title">
-                                        <a href="{{ url('view', { id: talk[0].id } ) }}">
+                                        <a href="{{ url('talk', { id: talk[0].id } ) }}">
                                             <h2>{{ talk[0].title }}</h2>
                                         </a>
                                     </div>

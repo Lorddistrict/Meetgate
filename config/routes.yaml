@@ -18,6 +18,10 @@ user:
     resource: routes/user.yaml
     prefix: /user
 
+rate:
+    resource: routes/rate.yaml
+    prefix: /rate
+
 # Connexions
 
 login:
