@@ -44,4 +44,17 @@ class TalkRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getTop10Talks()
+    {
+        return $this->createQueryBuilder('t')
+            ->addSelect('SUM(r.stars) as qqty')
+            ->addSelect('r')
+            ->leftJoin('t.rates', 'r')
+            ->setMaxResults(10)
+            ->groupBy('t.id')
+            ->orderBy('qqty', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

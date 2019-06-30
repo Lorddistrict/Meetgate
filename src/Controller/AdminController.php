@@ -113,26 +113,44 @@ class AdminController extends AbstractController
 
     public function manageEvents() : Response
     {
-        return $this->render('admin/management/events.html.twig');
+        return $this->render('admin/management/events/events.html.twig');
     }
 
     public function manageTalks() : Response
     {
-        return $this->render('admin/management/talks.html.twig');
+        return $this->render('admin/management/talks/talks.html.twig');
     }
 
     public function manageUsers() : Response
     {
-        return $this->render('admin/management/users.html.twig');
+        return $this->render('admin/management/users/users.html.twig');
     }
 
     public function topEvents() : Response
     {
-        return $this->render('admin/top/events.html.twig');
+        $doctrine = $this->getDoctrine();
+
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $doctrine->getRepository(Event::class);
+
+        $events = $eventRepository->getTop10Events();
+
+        return $this->render('admin/top/events.html.twig', [
+            'events' => $events,
+        ]);
     }
 
     public function topTalks() : Response
     {
-        return $this->render('admin/top/talks.html.twig');
+        $doctrine = $this->getDoctrine();
+
+        /** @var TalkRepository $talkRepository */
+        $talkRepository = $doctrine->getRepository(Talk::class);
+
+        $talks = $talkRepository->getTop10Talks();
+
+        return $this->render('admin/top/talks.html.twig', [
+            'talks' => $talks,
+        ]);
     }
 }

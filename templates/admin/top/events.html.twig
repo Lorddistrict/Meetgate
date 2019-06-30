@@ -1,0 +1,41 @@
+{% extends 'default/base.html.twig' %}
+
+{% block title %}Top 10 - Events{% endblock %}
+
+{% block body %}
+
+  <div class="container-fluid">
+
+    <div class="container" style="margin-top: 20px;">
+      <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">
+          <i class="fas fa-info"></i> Info
+        </h4>
+        <p class="mb-0">More expensive = better :D</p>
+      </div>
+    </div>
+
+    <div class="row">
+
+      {% for event in events %}
+
+        <div class="col-md-2" style="margin: 20px auto;">
+          <div class="card border-light mb-3" style="max-width: 20rem;">
+            <div class="card-header">{{ event.title|upper }}</div>
+            <div class="card-body">
+              <h4 class="card-title">Price : ${{ event.price }}</h4>
+              <p class="card-text">
+                {{ event.description|length > 150 ? event.description|slice(0, 150) : event.description }}
+              </p>
+              <a href="{{ url('event', { id: event.id } ) }}">read more</a>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

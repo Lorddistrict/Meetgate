@@ -73,7 +73,7 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
 
 - [ ] Back-Office
   - [ ] Admin
-    - [ ] Talks - Management
+    - [x] Events - Management
     - [ ] Talks - Top 10
     - [ ] User - Management
  - [ ] Email
@@ -81,7 +81,7 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
     - [ ] Send a mail to members
 - [ ] Front-Office
   - [x] Registration for users
-  - [x]Rate (1 to 5\*)
+  - [x] Rate (1 to 5\*)
   - [ ] Fetch unrated Talks
   - [ ] Fetch rated Talks
   - [x] Research events by title

@@ -37,4 +37,14 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getTop10Events()
+    {
+        return $this->createQueryBuilder('e')
+            ->setMaxResults(10)
+            ->orderBy('e.price', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
