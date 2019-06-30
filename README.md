@@ -5,14 +5,15 @@
 
 **Table of Contents**
 
-**[Git](##Git)**<br>
-**[Command](###Command)**<br>
-**[Makefile](##Makefile)**<br>
-**[Commands available](###Commands-available)**<br>
-**[CircleCI](##CircleCI)**<br>
-**[Errors](##Errors)**<br>
-**[Required](##Required)**<br>
-**[How the project works ?](##How-the-project-works-?)**<br>
+**[Docker](#docker)**<br>
+**[Git](#git)**<br>
+**[Command](#command)**<br>
+**[Makefile](#makefile)**<br>
+**[Commands available](#commands-available)**<br>
+**[CircleCI](#circleci)**<br>
+**[Errors](#errors)**<br>
+**[Required](#required)**<br>
+**[How does it works ?](#how-the-project-works-?)**<br>
 
 ----
 
