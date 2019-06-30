@@ -5,27 +5,33 @@
 
 **Table of Contents**
 
-[TOCM]
+**[Git](##Git)**<br>
+**[Command](###Command)**<br>
+**[Makefile](##Makefile)**<br>
+**[Commands available](###Commands-available)**<br>
+**[CircleCI](##CircleCI)**<br>
+**[Errors](##Errors)**<br>
+**[Required](##Required)**<br>
+**[How the project works ?](##How-the-project-works-?)**<br>
 
-[TOC]
+----
 
-#Start the project
-##Docker
+# Start the project
+
+## Docker
 
 To start the project you need to have <abbr title="https://docs.docker.com/install/">docker</abbr>, <abbr title="https://docs.docker.com/compose/install/">docker-compose</abbr> and <abbr title="https://getcomposer.org/">composer</abbr> installed.
 However you can clone and edit the **docker-compose** file in order running your own containers.
 
-##Git
-
-###Command
+## Git
+### Command
 
 `$ git clone https://github.com/Lorddistrict/Meetgate.git`
 
 ----
 
-##Makefile
-
-###Commands available
+## Makefile
+### Commands available
 
 **Start the project & all containers**
 
@@ -45,7 +51,7 @@ However you can clone and edit the **docker-compose** file in order running your
 
 ----
 
-##CircleCI
+## CircleCI
 
 [![CircleCI](https://circleci.com/gh/Lorddistrict/Meetgate.svg?style=svg)](https://circleci.com/gh/Lorddistrict/Meetgate) 
 
@@ -55,7 +61,7 @@ We put CircleCI on the project with 6/7 difficulty.
 
 ----
 
-##Errors
+## Errors
 
 Our Symfony level is around 30, we're still farming gobelins & wolfs apologies.
 > I've got an error with a directory named tmp/
@@ -76,7 +82,7 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
 
 ----
 
-##Required
+## Required
 
 - [ ] Back-Office
   - [ ] Admin
@@ -103,7 +109,7 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
 
 ----
 
-##How the project works ?
+## How the project works ?
 
 This project has been created to increase the ease for users creating events, those who want to teach others and those who want to learn something.
 It allow you to **create** and **manage** events, talks with a **tag** & **rating** system !
