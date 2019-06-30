@@ -30,14 +30,23 @@ However you can clone and edit the **docker-compose** file in order running your
 
 ### Files
 The project needs you to create :
+
 **.env.local**
+
+`cp .env .env.local`
+
 **docker-compose.override.yml**
 
+`cp docker-compose.override.yml.dist docker-compose.override.yml`
+
 Copy the content of **.env** and **docker-compose.override.yml.dist** and past it into the files you created.
+
 Complete the ports into **docker-compose.override.yml**.
+
 Complete your local environment with **.env.local**.
 
 We advice you to keep **dev** environment to avoid missing config :p
+
 I don't know if the name is important. **app** is the name i have chosen. Keep it in mind :)
 
 
