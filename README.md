@@ -74,7 +74,7 @@ We're using our own **php.ini** config file. If it doesn't match with your confi
 - [ ] Back-Office
   - [ ] Admin
     - [x] Events - Management
-    - [ ] Talks - Top 10
+    - [x] Talks - Top 10
     - [ ] User - Management
  - [ ] Email
     - [x] Install Mailhog
