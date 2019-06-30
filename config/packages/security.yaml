@@ -3,7 +3,6 @@ security:
         App\Entity\User:
             algorithm: bcrypt
 
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -11,21 +10,20 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
             form_login:
                 login_path: login
                 check_path: login
-                username_parameter: "_email"
-                csrf_token_generator: security.csrf.token_manager
-
+                default_target_path: /
+                failure_path: /login
             logout:
-                path: logout
+                path: /logout
+                target: index
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
@@ -42,4 +40,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: /, roles: ROLE_USER }

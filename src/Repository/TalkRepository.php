@@ -19,32 +19,19 @@ class TalkRepository extends ServiceEntityRepository
         parent::__construct($registry, Talk::class);
     }
 
-    // /**
-    //  * @return Talk[] Returns an array of Talk objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getTalksByRate(int $event_id)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->addSelect('AVG(r.stars) as moy')
+            ->addSelect('r')
+            ->from('App:Event', 'e')
+            ->leftJoin('t.rates', 'r')
+            ->where('t.event = e.id')
+            ->andWhere('t.event = :event_id')
+            ->setParameter('event_id', $event_id)
+            ->groupBy('t.id')
+            ->orderBy('moy', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Talk
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

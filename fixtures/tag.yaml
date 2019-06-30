@@ -1,0 +1,31 @@
+App\Entity\Tag:
+  tag-1:
+    __construct: false
+    name (unique): 'PHP'
+  tag-2:
+    __construct: false
+    name (unique): 'JS'
+  tag-3:
+    __construct: false
+    name (unique): 'CSS'
+  tag-4:
+    __construct: false
+    name (unique): 'HTML'
+  tag-5:
+    __construct: false
+    name (unique): 'JAVA'
+  tag-6:
+    __construct: false
+    name (unique): 'BIG DATA'
+  tag-7:
+    __construct: false
+    name (unique): 'IA'
+  tag-8:
+    __construct: false
+    name (unique): 'SYMFONY'
+  tag-9:
+    __construct: false
+    name (unique): 'LARAVEL'
+  tag-10:
+    __construct: false
+    name (unique): 'C#'

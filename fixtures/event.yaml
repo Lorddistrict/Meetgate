@@ -3,5 +3,10 @@ App\Entity\Event:
     __construct: false
     title (unique): '<word()>'
     dateEvent: "<dateTimeBetween('2 year ago', 'now')>"
-    description: '<paragraph(3, true)>'
+    description: '<paragraph(10, true)>'
     picture: '<imageUrl(640, 480)>'
+    duration: '<numberBetween(1, 7)>'
+    price: '<randomFloat(2, 0, 50)>'
+    adress: '<streetAddress()>'
+    places: '<numberBetween(50, 250)>'
+    tags: '@tag-<numberBetween(1,10)>'

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -56,7 +58,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Talk", mappedBy="author")
      */
-    private $userTalks;
+    private $talks;
 
     /**
      * @var string
@@ -65,10 +67,23 @@ class User implements UserInterface
      */
     protected $resetToken;
 
-    /*
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="user")
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rate", mappedBy="user")
      */
-    private $event;
+    private $rates;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="user")
+     */
+    private $participations;
+
+
+    public function __construct()
+    {
+        $this->rates = new ArrayCollection();
+        $this->participations = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -80,13 +95,13 @@ class User implements UserInterface
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -126,7 +141,6 @@ class User implements UserInterface
     {
         return (string)$this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -158,7 +172,6 @@ class User implements UserInterface
     {
         return $this->name;
     }
-
     public function setName($name)
     {
         $this->name = $name;
@@ -169,7 +182,6 @@ class User implements UserInterface
     {
         return $this->firstname;
     }
-
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -180,7 +192,6 @@ class User implements UserInterface
     {
         return $this->certifiedToken;
     }
-
     public function setCertifiedToken($certifiedToken)
     {
         $this->certifiedToken = $certifiedToken;
@@ -191,20 +202,77 @@ class User implements UserInterface
     {
         return $this->isCertified;
     }
-
     public function setIsCertified($isCertified)
     {
         $this->isCertified = $isCertified;
     }
 
 
-    public function getUserTalks()
+    public function getTalks()
     {
-        return $this->userTalks;
+        return $this->talks;
+    }
+    public function setTalks($talks): void
+    {
+        $this->talks = $talks;
     }
 
-    public function setUserTalks($userTalks): void
+
+    /**
+     * @return Collection|Rate[]
+     */
+    public function getRates(): Collection
     {
-        $this->userTalks = $userTalks;
+        return $this->rates;
+    }
+    public function addRate(Rate $rate): self
+    {
+        if (!$this->rates->contains($rate)) {
+            $this->rates[] = $rate;
+            $rate->setUser($this);
+        }
+
+        return $this;
+    }
+    public function removeRate(Rate $rate): self
+    {
+        if ($this->rates->contains($rate)) {
+            $this->rates->removeElement($rate);
+            // set the owning side to null (unless already changed)
+            if ($rate->getUser() === $this) {
+                $rate->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setUser($this);
+        }
+
+        return $this;
+    }
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getUser() === $this) {
+                $participation->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

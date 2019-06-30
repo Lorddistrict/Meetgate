@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,16 +29,26 @@ class Talk
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userTalks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="talks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventTalks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="talks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rate", mappedBy="talk")
+     */
+    private $rates;
+
+    public function __construct()
+    {
+        $this->rates = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -86,5 +98,37 @@ class Talk
     public function setEvent($event): void
     {
         $this->event = $event;
+    }
+
+
+    /**
+     * @return Collection|Rate[]
+     */
+    public function getRates(): Collection
+    {
+        return $this->rates;
+    }
+
+    public function addRate(Rate $rate): self
+    {
+        if (!$this->rates->contains($rate)) {
+            $this->rates[] = $rate;
+            $rate->setTalk($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRate(Rate $rate): self
+    {
+        if ($this->rates->contains($rate)) {
+            $this->rates->removeElement($rate);
+            // set the owning side to null (unless already changed)
+            if ($rate->getTalk() === $this) {
+                $rate->setTalk(null);
+            }
+        }
+
+        return $this;
     }
 }
