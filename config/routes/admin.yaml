@@ -1,0 +1,35 @@
+admin:
+  path: /
+  controller: App\Controller\AdminController::index
+
+manage_users:
+  path: /management/users
+  controller: App\Controller\AdminController::manageUsers
+
+manage_events:
+  path: /management/events
+  controller: App\Controller\AdminController::manageEvents
+
+manage_talks:
+  path: /management/talks
+  controller: App\Controller\AdminController::manageTalks
+
+top_events:
+  path: /top/events
+  controller: App\Controller\AdminController::topEvents
+
+top_talks:
+  path: /top/talks
+  controller: App\Controller\AdminController::topTalks
+
+addEvent:
+  path: /management/create/event
+  controller: App\Controller\AdminController::addEvent
+
+addTalk:
+  path: /management/create/talk
+  controller: App\Controller\AdminController::addTalk
+
+addUser:
+  path: /management/create/user
+  controller: App\Controller\AdminController::addUser

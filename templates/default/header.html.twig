@@ -22,17 +22,29 @@
                     <a class="nav-link" href="{{ url('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
+                {% if app.user != null and app.user.roles[0] == "ROLE_ADMIN" %}
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="{{ url('top_events') }}">Top 10 Events</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="{{ url('top_talks') }}">Top 10 Talks</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{{ url('manage_events') }}">Manage Events</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('manage_users') }}">Manage Users</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('manage_talks') }}">Manage Talks</a>
+                </li>
+
+                {% endif %}
 
             </ul>
             <ul class="navbar-nav">
@@ -61,6 +73,13 @@
                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
                                     <a class="dropdown-item" href="{{ url('logout') }}">Me déconnecter</a>
                                     <a class="dropdown-item" href="#">Dashboard</a>
+
+                                    {% if app.user != null and app.user.roles[0] == "ROLE_ADMIN" %}
+
+                                        <a class="dropdown-item" href="{{ url('admin') }}">Panel admin</a>
+
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </div>

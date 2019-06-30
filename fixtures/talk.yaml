@@ -4,4 +4,5 @@ App\Entity\Talk:
     title: '<word()>'
     description: '<paragraph(3, true)>'
     author: '@user-<numberBetween(1,50)>'
+    created: "<dateTimeBetween('1 year ago', 'now')>"
     event: '@event-<numberBetween(1,10)>'

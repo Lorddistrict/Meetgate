@@ -1,4 +1,13 @@
 App\Entity\User:
+  user-etienne:
+    __construct: false
+    email (unique): 'etienne.crespi@laposte.net'
+    name: 'CRESPI'
+    firstname: 'Etienne'
+    roles: '[ROLE_ADMIN]'
+    password: '\$2y\$13\$R5t.U5SBSCJVmjGxGb5tYOV0SqmJT8M9W9pCkE9QWn/agtuX8An2K'
+    certifiedToken: null
+    isCertified: true
   user-{1..50}:
     __construct: false
     email (unique): '<email()>'

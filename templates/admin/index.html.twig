@@ -1,0 +1,102 @@
+{% extends 'default/base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+
+    <style type="text/css">
+        .admin{}
+        .admin .spacer{margin-top: 30px;}
+    </style>
+
+    <div class="container-fluid admin">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Last events :
+                    <a href="{{ url('addEvent') }}" class="btn btn-info">
+                        <i class="fas fa-plus"></i>&nbsp;Add an event
+                    </a>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for event in events %}
+
+            <div class="col-md-2">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">{{ event.title|upper }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Tags :
+                            {% for tag in event.tags %}
+                                <a href="{{ url('tag', { id: tag.id }) }}" class="tag-link">
+                                    <span class="badge badge-pill badge-success">{{ tag.name }}</span>&nbsp;
+                                </a>
+                            {% endfor %}
+                        </h4>
+                        <p class="card-text">
+                            {{ event.description|length > 30 ? event.description|slice(0,30) : event.description }}
+                            <br>
+                            <a href="{{ url('event', { id: event.id } ) }}">read more</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Last talks :
+                    <a href="" class="btn btn-info">
+                        <i class="fas fa-plus"></i>&nbsp;Add a talk
+                    </a>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <div class="row">
+            {% for talk in talks %}
+
+                <div class="col-md-2">
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">{{ talk.title|upper }}</div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Rate :
+                            </h4>
+                            <p class="card-text">
+                                {{ talk.description|length > 30 ? talk.description|slice(0,30) : talk.description }}
+                                <br>
+                                <a href="{{ url('talk', { 'id': talk.id } ) }}">read more</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

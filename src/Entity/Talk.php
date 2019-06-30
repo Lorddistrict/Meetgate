@@ -35,6 +35,11 @@ class Talk
     private $author;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="talks")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -88,6 +93,17 @@ class Talk
     public function setAuthor($author): void
     {
         $this->author = $author;
+    }
+
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+        return $this;
     }
 
 

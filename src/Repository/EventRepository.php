@@ -23,21 +23,28 @@ class EventRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findHomeEventsQuery() : Query
+    public function findHomeEventsQuery(): Query
     {
         return $this->createQueryBuilder('e')
             ->getQuery();
     }
 
-    /*
-    public function findOneBySomeField($value): ?Event
+    public function getLastFiveEvents()
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
+            ->setMaxResults(5)
+            ->orderBy('e.created', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+    public function getTop10Events()
+    {
+        return $this->createQueryBuilder('e')
+            ->setMaxResults(10)
+            ->orderBy('e.price', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
