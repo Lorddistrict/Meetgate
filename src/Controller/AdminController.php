@@ -11,7 +11,10 @@ use App\Form\AddTalkType;
 use App\Repository\EventRepository;
 use App\Repository\RateRepository;
 use App\Repository\TalkRepository;
+use App\Repository\UserRepository;
 use DateTime;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,10 +52,13 @@ class AdminController extends AbstractController
         ]);
     }
 
-    public function addEvent(Request $request) : Response
+    public function addEvent(Request $request, Swift_Mailer $mailer) : Response
     {
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
+
+        /** @var UserRepository $userRepository */
+        $userRepository = $doctrine->getRepository(User::class);
 
         /** @var Event $event */
         $event = new Event();
@@ -70,6 +76,29 @@ class AdminController extends AbstractController
             $event->setCreated($now);
             $em->persist($event);
             $em->flush();
+
+            // send a mail for all users with allow = 1
+            $users = $userRepository->findAll([
+                'allowMails' => true,
+            ]);
+
+            foreach ($users as $key => $user){
+
+                /** @var Swift_Message $message */
+                $message = (new Swift_Message('An event has been created !'));
+                $message->setFrom('contact@meetgate.com');
+                $message->setTo($user->getEmail());
+                $message->setBody(
+                    $this->render('email/eventCreated.html.twig', [
+                        'firstname' => $user->getFirstname(),
+                        'eventId' => $event
+                    ]),
+                    'text/html'
+                );
+                $mailer->send($message);
+
+            }
+
 
             $this->addFlash('success', 'An Event has been created !');
             return $this->redirectToRoute('admin');
