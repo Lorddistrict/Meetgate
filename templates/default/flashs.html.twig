@@ -1,0 +1,33 @@
+{% for label, messages in app.flashes %}
+
+  {% for message in messages %}
+
+    <div class="alert alert-{{ label }}">
+
+      {% if label is defined and label == 'success' %}
+
+        <i class="fas fa-check fa-flasher"></i>
+
+      {% elseif label is defined and label == 'info' %}
+
+        <i class="fas fa-info-circle fa-flasher"></i>
+
+      {% elseif label is defined and label == 'warning' %}
+
+        <i class="fas fa-exclamation-circle fa-flasher"></i>
+
+      {% elseif label is defined and label == 'danger' %}
+
+        <i class="fas fa-exclamation-triangle fa-flasher"></i>
+
+      {% else %}
+
+      {% endif %}
+
+      {{ message }}
+
+    </div>
+
+  {% endfor %}
+
+{% endfor %}

@@ -6,36 +6,62 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">id : {{ talk.id }}</div>
-            <hr>
-            <div class="col-md-12">title : {{ talk.title }}</div>
-            <hr>
-            <div class="col-md-12">desc : {{ talk.description }}</div>
-            <hr>
-            <div class="col-md-12">rate : {{ rate }}/5</div>
             <div class="col-md-12">
-                <div class='starrr'></div>
+                <div class="spacer"></div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ talk.title|upper }}</h1>
+            </div>
+            <div class="col-md-12">
+                <h6>
+                    by <a href="{{ url('user', { id: talk.author.id } ) }}">{{ talk.author.firstname }}&nbsp;{{ talk.author.name|upper }}</a>
+                </h6>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
 
-            {% if app.user != null %}
+                <div class='starrr'></div>
 
-                {% if allowRate is defined and allowRate == false %}
+                {% if app.user != null %}
 
-                <div class="col-md-12">
-                    <small>You already rated {{ starsGivenCurrentTalk }}* this talk :p</small>
-                </div>
+                    {% if allowRate is defined and allowRate == false %}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <i class="fas fa-check"></i>
+                                <small>You already rated {{ starsGivenCurrentTalk }}* this talk :p</small>
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <small class="ban">You have to be connected if you want to rate this talk</small>
+                        </div>
+                    </div>
 
                 {% endif %}
 
-            {% else %}
-
-                <div class="col-md-12">
-                    <small class="ban">You have to be connected if you want to rate this talk</small>
-                </div>
-
-            {% endif %}
-
+            </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                Posted on {{ talk.created|date('l d F Y') }}
+            </div>
+        </div>
+        <hr>
+        <img src="http://lorempixel.com/900/300/" alt="randompic">
+        <hr>
+        <p>{{ talk.description }}</p>
     </div>
 
     <script type="application/javascript">
@@ -43,36 +69,36 @@
 
             {% if allowRate is defined and allowRate == true %}
 
-            $('.starrr').starrr({
-                rating: {{ rate }},
-            });
+                $('.starrr').starrr({
+                    rating: {{ rate }},
+                });
 
-            $('.starrr').on('starrr:change', function(e, value){
-                if (value) {
-                    var valid = confirm('Are you sure you want to rate ' + value + '* ?');
-                    if(valid){
-                        $.ajax({
-                            url: '{{ url('rate') }}',
-                            type: 'POST',
-                            data: 'rate=' + value + '&talk=' + {{ talk.id }},
-                            success: function(data){
-                                if(data){
-                                    document.location.reload(true);
+                $('.starrr').on('starrr:change', function(e, value){
+                    if (value) {
+                        var valid = confirm('Are you sure you want to rate ' + value + '* ?');
+                        if(valid){
+                            $.ajax({
+                                url: '{{ url('rate') }}',
+                                type: 'POST',
+                                data: 'rate=' + value + '&talk=' + {{ talk.id }},
+                                success: function(data){
+                                    if(data){
+                                        document.location.reload(true);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+                    } else {
+                        console.log('An error as occured');
                     }
-                } else {
-                    console.log('An error as occured');
-                }
-            });
+                });
 
             {% else %}
 
-            $('.starrr').starrr({
-                rating: {{ rate }},
-                readOnly: true,
-            });
+                $('.starrr').starrr({
+                    rating: {{ rate }},
+                    readOnly: true,
+                });
 
             {% endif %}
 

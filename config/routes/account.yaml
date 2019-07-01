@@ -9,3 +9,11 @@ confirm:
 password:
   path: /password
   controller: App\Controller\UserController::password
+
+reset:
+  path: /password/reset
+  controller: App\Controller\UserController::resetPassword
+
+change_password:
+  path: /password/change
+  controller: App\Controller\UserController::recoverPassword
