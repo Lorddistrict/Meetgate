@@ -12,6 +12,12 @@ button.not-allowed:hover{cursor: not-allowed;}
 .form-spacer label{margin: 0 15px 0 5px!important;}
 .info-map{margin-top: 20px;}
 div.spacer{margin-top: 30px;}
+button.btn-spacer{margin-top: 15px;}
+input.form-spacer{margin: 10px auto;}
+div.form-group div ul li{color: #e1302a;}
+i.fa-flasher{font-weight: bold;}
+div.alert-warning{color: black;}
+div.wrap-login100 .alert{border-radius: 0; margin-bottom: 0;}
 
 
 

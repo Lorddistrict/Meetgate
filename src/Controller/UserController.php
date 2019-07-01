@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\PasswordRecoveryType;
+use App\Form\PasswordResetType;
 use App\Repository\UserRepository;
 use Swift_Mailer;
 use Swift_Message;
@@ -164,7 +165,6 @@ class UserController extends AbstractController
             ]);
 
             if ( empty($user) ) {
-                dd('unknown');
                 $this->addFlash('warning', 'Unknown email');
                 return $this->redirectToRoute('password');
             }
@@ -193,9 +193,7 @@ class UserController extends AbstractController
                 );
             $mailer->send($message);
 
-            $this->addFlash('notice', 'An email has been sent');
-
-            // Useless to redirect on another route
+            $this->addFlash('success', ' An email has been sent');
             return $this->redirectToRoute('password');
         }
 
@@ -206,17 +204,23 @@ class UserController extends AbstractController
 
     /**
      * @param Request $request
-     * @param string $token
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        dd($request);
-        if ($request->isMethod('GET')) {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
 
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
+        /** @var User $user */
+        $user = new User();
+
+        $form = $this->createForm(PasswordResetType::class, $user);
+        $form->handleRequest($request);
+
+        $token = $request->get('token');
+
+        if( !empty($token) ){
 
             /** @var UserRepository $userRepository */
             $userRepository = $doctrine->getRepository(User::class);
@@ -226,27 +230,48 @@ class UserController extends AbstractController
                 'resetToken' => $token,
             ]);
 
-            if (empty($user)) {
-                $this->addFlash('danger', 'Token Inconnu');
+            if( !empty($user) ){
+
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    $newPassword = $form->getData()->getPassword();
+
+                    if(strlen($newPassword) < 6){
+                        $this->addFlash('warning', 'Password to short (6 characters min) !');
+                        return $this->render('security/passwordReset.html.twig', [
+                            'form' => $form->createView(),
+                        ]);
+                    }
+
+                    $passwordEncoded = $passwordEncoder->encodePassword($user, $newPassword);
+                    $user->setResetToken(null);
+                    $user->setPassword($passwordEncoded);
+
+                    // No need to persist() because the object is already on the DB
+                    $em->flush();
+
+                    $this->addFlash('success', 'Password updated !');
+                    return $this->redirectToRoute('login');
+                }
+
+            } else {
+                $this->addFlash('warning', 'The token has expired or has never been created. Please retry or contact our support.');
                 return $this->redirectToRoute('login');
             }
 
-            $passwordEncoded = $passwordEncoder->encodePassword($user, $request->request->get('password'));
-            $user->setResetToken(null);
-            $user->setPassword($passwordEncoded);
+        }else{
 
-            // No need to persist() because the object is already on the DB
-            $em->flush();
-
-            $this->addFlash('success', 'Password updated !'); // ???
-            return $this->redirectToRoute('login');
-
-        } else {
-
+            $this->addFlash('warning', 'Sorry, something\'s wrong, please retry or contact our support.');
             return $this->render('security/passwordReset.html.twig', [
-                'token' => $token
+                'form' => $form->createView(),
             ]);
+
         }
+
+        return $this->render('security/passwordReset.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
     }
 
     /**

@@ -63,7 +63,7 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
-     * Token you will send in order identify the mail owner
+     * Token you will send in order to identify the mail owner
      */
     protected $resetToken;
 
@@ -228,7 +228,7 @@ class User implements UserInterface
     /**
      * @param string $resetToken
      */
-    public function setResetToken(string $resetToken): void
+    public function setResetToken(?string $resetToken): void
     {
         $this->resetToken = $resetToken;
     }
