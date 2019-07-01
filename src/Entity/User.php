@@ -219,6 +219,22 @@ class User implements UserInterface
 
 
     /**
+     * @return string
+     */
+    public function getResetToken(): string
+    {
+        return $this->resetToken;
+    }
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken(string $resetToken): void
+    {
+        $this->resetToken = $resetToken;
+    }
+
+
+    /**
      * @return Collection|Rate[]
      */
     public function getRates(): Collection

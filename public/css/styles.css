@@ -11,6 +11,7 @@ button.not-allowed:hover{cursor: not-allowed;}
 .pagination a{font-size: 20px; padding: 0 10px;}
 .form-spacer label{margin: 0 15px 0 5px!important;}
 .info-map{margin-top: 20px;}
+div.spacer{margin-top: 30px;}
 
 
 
@@ -21,7 +22,8 @@ div.meetgate div.container-fluid div.our-talks{padding: 307px 0 594px 0; width: 
 div.meetgate div.container-fluid div.our-talks h1{font-size: 50px;}
 div.meetgate div.container-fluid div.our-talks a.btn-top{padding: 15px 30px; font-size: 18px;}
 div.meetgate div.container-fluid div.our-talks a.btn-events{margin-right: 20px;}
-div.meetgate div.container-fluid div.our-talks a.btn-themes{margin-left: 20px;}
+div.meetgate div.container-fluid div.our-talks a.btn-themes{margin-left: 20px; background-color: grey;}
+div.meetgate div.container-fluid div.our-talks a.btn-themes:hover{cursor: not-allowed;}
 div.meetgate div.container-fluid div.researchbar-content{display: inline-block; text-align: center; width: 100%;}
 div.meetgate div.container-fluid div.researchbar-content div.rsbar{width: 40%; background-color: #3a3a3a; padding: 10px 10px; margin: 0 auto; display: inline-block; vertical-align: top; margin-left: -4px; margin-right: -4px;}
 div.meetgate div.container-fluid div.researchbar-content div.arrow-left{display: inline-block; width: 0; height: 0; border-top: 35px solid transparent; border-right : 61px solid #3a3a3a; border-bottom : 35px solid transparent;}
