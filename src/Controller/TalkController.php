@@ -52,9 +52,6 @@ class TalkController extends AbstractController
             $rate = $stars/$nbRates;
         }
 
-        // If user isn't logged
-        $this->addFlash('warning', 'You have to be logged in order rating this talk !');
-
         if( empty($currentUser) ){
 
             return $this->render('talk/view.html.twig', [

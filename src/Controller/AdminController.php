@@ -18,6 +18,7 @@ use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AdminController extends AbstractController
 {
@@ -74,31 +75,36 @@ class AdminController extends AbstractController
             /** @var DateTime $now */
             $now = new DateTime();
             $event->setCreated($now);
+            $event->setPicture('https://lorempixel.com/640/480/');
             $em->persist($event);
             $em->flush();
 
             // send a mail for all users with allow = 1
-            $users = $userRepository->findAll([
+            $users = $userRepository->findBy([
                 'allowMails' => true,
             ]);
+
+            $url = $this->generateUrl('event', [
+                'id' => $event->getId(),
+            ],UrlGeneratorInterface::ABSOLUTE_URL);
 
             foreach ($users as $key => $user){
 
                 /** @var Swift_Message $message */
-                $message = (new Swift_Message('An event has been created !'));
+                $message = new Swift_Message('An event has been created !');
                 $message->setFrom('contact@meetgate.com');
                 $message->setTo($user->getEmail());
                 $message->setBody(
                     $this->render('email/eventCreated.html.twig', [
                         'firstname' => $user->getFirstname(),
-                        'eventId' => $event
+                        'event' => $event,
+                        'url' => $url,
                     ]),
                     'text/html'
                 );
                 $mailer->send($message);
 
             }
-
 
             $this->addFlash('success', 'An Event has been created !');
             return $this->redirectToRoute('admin');

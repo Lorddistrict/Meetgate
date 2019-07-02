@@ -10,6 +10,7 @@
         <div class="spacer"></div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
         <h1>New Event</h1>
@@ -28,6 +29,7 @@
             }
           }) }}
         </div>
+
         <div class="form-group">
           {{ form_row(form.dateEvent, {
             'label': false,
@@ -36,6 +38,7 @@
             },
           }) }}
         </div>
+
         <div class="form-group">
           <label for="title">Description : </label>
           {{ form_row(form.description, {
@@ -47,18 +50,7 @@
             }
           }) }}
         </div>
-        <div class="custom-file">
-          <label class="custom-file-label" for="customFile">Picture</label>
-          {{ form_row(form.picture, {
-            'label': false,
-            'attr': {
-              'class': 'custom-file-input',
-              'type': 'file',
-              'id': 'customFile',
-              'placeholder': 'Upload the picture showed on the event page'
-            }
-          }) }}
-        </div>
+
         <div class="form-group">
           <label for="title">Duration : </label>
           {{ form_row(form.duration, {
@@ -69,6 +61,7 @@
             }
           }) }}
         </div>
+
         <div class="form-group">
           {{ form_row(form.price, {
             'label': false,
@@ -78,6 +71,7 @@
             }
           }) }}
         </div>
+
         <div class="form-group">
           <label for="title">Adress : </label>
           {{ form_row(form.adress, {
@@ -88,6 +82,7 @@
             }
           }) }}
         </div>
+
         <div class="form-group">
           <label for="title">Places : </label>
           {{ form_row(form.places, {
@@ -98,6 +93,7 @@
             }
           }) }}
         </div>
+
         <div class="form-group">
           <label class="form-check-label" for="tags">Tags : </label>
           {{ form_row(form.tags, {
@@ -111,11 +107,16 @@
         </div>
 
         <button class="btn btn-success float-left article-edit-btn">
-          <i class="fas fa-check"></i>&nbsp;{{ 'Appliquer'|default('Save') }}
+          <i class="fas fa-check"></i>&nbsp;{{ 'Create my event'|default('Save') }}
         </button>
 
         {{ form_end(form) }}
 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="spacer"></div>
       </div>
     </div>
   </div>
