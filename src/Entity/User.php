@@ -77,6 +77,13 @@ class User implements UserInterface
      */
     private $participations;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $allowMails;
+
+
+
 
     public function __construct()
     {
@@ -288,6 +295,18 @@ class User implements UserInterface
                 $participation->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+
+    public function getAllowMails(): ?bool
+    {
+        return $this->allowMails;
+    }
+    public function setAllowMails(bool $allowMails): self
+    {
+        $this->allowMails = $allowMails;
 
         return $this;
     }

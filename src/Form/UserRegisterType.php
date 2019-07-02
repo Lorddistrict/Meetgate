@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -19,13 +20,12 @@ class UserRegisterType extends AbstractType
             ->add('name', TextType::class)
             ->add('firstname', TextType::class)
             ->add('email', EmailType::class)
-            ->add('password', PasswordType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Passwords are not the same',
                 'options' => [
                     'attr' => [
-                        'class' => 'password-field'
+                        'class' => 'input100'
                     ]
                 ],
                 'required' => true,
@@ -35,7 +35,11 @@ class UserRegisterType extends AbstractType
                 'second_options' => [
                     'label' => 'Repeat Password'
                 ]
-            ]);
+            ])
+            ->add('allowMails', CheckboxType::class, [
+                'label' => false
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -86,13 +86,13 @@ class UserController extends AbstractController
             );
             $mailer->send($message);
 
-//            Keep it
-//            $this->addFlash('success', 'Inscription OK - Connectez vous !');
 
             return $this->render('security/preconfirm.html.twig', [
                 'email' => $user->getEmail(),
             ]);
         }
+
+
         return $this->render('security/register.html.twig', [
             'form' => $form->createView()
         ]);
@@ -124,10 +124,14 @@ class UserController extends AbstractController
             $user->setIsCertified(true);
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash('success', 'Your account has been validated !');
             return $this->render('security/confirm.html.twig', array(
                 'valid' => true,
             ));
         }
+
+        $this->addFlash('danger', 'We couldn\'t validate this account with this token. Please try again, if it happend again, contact the support.');
         return $this->render('security/confirm.html.twig', array(
             'valid' => false,
         ));

@@ -25,7 +25,6 @@ class AddEventType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('description', TextareaType::class)
-            ->add('picture', FileType::class)
             ->add('duration', IntegerType::class)
             ->add('price', MoneyType::class)
             ->add('adress', TextType::class)

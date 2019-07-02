@@ -27,8 +27,7 @@ class PasswordResetType extends AbstractType
                 'first_options'  => [
                     'label' => 'New password (6 characters min)',
                     'attr' => [
-                        'class' => 'form-control form-spacer',
-                        ''
+                        'class' => 'form-control form-spacer'
                     ]
                 ],
                 'second_options' => [
