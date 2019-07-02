@@ -43,7 +43,7 @@ div.meetgate div.container-fluid div.events div.eventlist{display: inline-block;
 div.meetgate div.container-fluid div.events div.eventlist div.event{display: inline-block; border: 1px solid #d2d2d2; background-color: #e6e6e6; min-height: 640px; margin: 0 10px 30px 10px;}
 div.meetgate div.container-fluid div.events div.eventlist div.event div.event-title{border-bottom: 1px solid #d2d2d2; padding: 10px 20px; text-transform: uppercase; background-color: #ffffff;}
 div.meetgate div.container-fluid div.events div.eventlist div.event div.event-content{border-bottom: 1px solid #d2d2d2; padding: 0; overflow: hidden; background-color: #ffffff;}
-div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description{padding: 0 20px; background-color: #ffffff;}
+div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description{padding: 0 20px; background-color: #ffffff; min-height: 117px;}
 div.meetgate div.container-fluid div.events div.eventlist div.event div.event-description p{text-align: left; padding: 10px 0;}
 div.meetgate div.container-fluid div.create-yourself{background-color: #3a3a3a; color: #c1c1c1; width: 100%; padding: 100px 0;}
 div.meetgate div.container-fluid div.create-yourself h3{margin: 0 0 50px 0; color: #c1c1c1;}
