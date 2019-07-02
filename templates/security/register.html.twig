@@ -22,29 +22,78 @@
           }) }}
 
           <div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
-            <label><span class="label-input100">Email</span></label>
-            {{ form_widget(form.email,{'attr': {'placeholder': 'Votre email','class':'input100'}}) }}
+            <label>
+              <span class="label-input100">Email</span>
+            </label>
+            {{ form_widget(form.email, {
+              'attr': {
+                'placeholder': 'email',
+                'class': 'input100'
+              }
+            }) }}
           </div>
 
           <div class="wrap-input100 validate-input m-b-26" data-validate="Firstname is required">
-            <label><span class="label-input100">Firstname</span></label>
-            {{ form_widget(form.firstname,{'attr': {'placeholder': 'Votre prénom','class':'input100'}}) }}
+            <label>
+              <span class="label-input100">Firstname</span>
+            </label>
+            {{ form_widget(form.firstname, {
+              'attr': {
+                'placeholder': 'firstname',
+                'class': 'input100'
+              }
+            }) }}
           </div>
 
           <div class="wrap-input100 validate-input m-b-26" data-validate="Name is required">
-            <label><span class="label-input100">Name</span></label>
-            {{ form_widget(form.name,{'attr': {'placeholder': 'Votre nom','class':'input100'}}) }}
+            <label>
+              <span class="label-input100">Name</span>
+            </label>
+            {{ form_widget(form.name, {
+              'attr': {
+                'placeholder': 'name',
+                'class': 'input100'
+              }
+            }) }}
           </div>
 
           <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-            <label><span class="label-input100">Password</span></label>
-            {{ form_widget(form.password,{'attr': {'placeholder': 'Votre mot de passe','class':'input100'}}) }}
+            <label>
+              <span class="label-input100">Password</span>
+            </label>
+            {{ form_widget(form.password.first, {
+              'attr': {
+                'placeholder': 'password',
+                'class': 'input100'
+              }
+            }) }}
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+            <label>
+              <span class="label-input100">Repeat password</span>
+            </label>
+            {{ form_widget(form.password.second, {
+              'attr': {
+                'placeholder': 'confirm password',
+                'class': 'input100'
+              }
+            }) }}
+          </div>
+
+          <div class="flex-sb-m p-b-30">
+            {{ form_widget(form.allowMails, {
+              'attr': {
+                'type': 'checkbox'
+              }
+            }) }}
+            <label for="ckb1" class="checkbox-form">Do you want us to send a mail when an event is scheduled ?</label>
           </div>
 
           <div class="flex-sb-m w-full p-b-30">
             <div class="contact100-form-checkbox">
-              <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-              <label class="label-checkbox100" for="ckb1">Remember me</label>
+              <input class="input-checkbox100" id="ckb2" type="checkbox" name="remember-me">
+              <label class="label-checkbox100" for="ckb2">Remember me</label>
             </div>
 
           </div>

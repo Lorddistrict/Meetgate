@@ -31,6 +31,7 @@ class TalkRepository extends ServiceEntityRepository
             ->setParameter('event_id', $event_id)
             ->groupBy('t.id')
             ->orderBy('moy', 'DESC')
+            ->orderBy('t.id', 'ASC')
             ->getQuery()
             ->getResult();
     }

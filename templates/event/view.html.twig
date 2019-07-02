@@ -128,7 +128,7 @@
 
                         {% for talk in talks %}
 
-                            {% set cumulatedRates = 0 %}
+{#                            {% set cumulatedRates = 0 %}#}
 
                             <div class="col-md-6 talks-back">
                                 <div class="row talks-row">
@@ -137,28 +137,21 @@
                                             <h2>{{ talk[0].title }}</h2>
                                         </a>
                                     </div>
-                                    <div class="col-md-2 talk-rate">
-
-                                        {% for rate in talk[0].rates %}
-                                            {% set cumulatedRates = cumulatedRates + rate.stars %}
-                                        {% endfor %}
+                                    <div class="col-md-12 talk-rate">
 
                                         {% if talk[0].rates|length != 0 %}
-                                            {% set stars = cumulatedRates / talk[0].rates|length %}
 
-                                            {% for iter in 1..stars %}
+                                            {% for i in 1..talk.moy|round(1, 'ceil') %}
                                                 <i class="fas fa-star"></i>
                                             {% endfor %}
 
-                                            {% if stars != 5 %}
-                                                {% for iter in stars+1..5 %}
-                                                    <i class="far fa-star"></i>
-                                                {% endfor %}
-                                            {% endif %}
+                                            {% for i in talk.moy|round(1, 'ceil')..4 %}
+                                                <i class="far fa-star"></i>
+                                            {% endfor %}
 
                                         {% else %}
 
-                                            {% for iter in 1..5 %}
+                                            {% for i in 1..5 %}
                                                 <i class="far fa-star"></i>
                                             {% endfor %}
 

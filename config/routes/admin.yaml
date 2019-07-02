@@ -23,13 +23,13 @@ top_talks:
   controller: App\Controller\AdminController::topTalks
 
 addEvent:
-  path: /management/create/event
+  path: /management/events/add
   controller: App\Controller\AdminController::addEvent
 
 addTalk:
-  path: /management/create/talk
+  path: /management/talks/add
   controller: App\Controller\AdminController::addTalk
 
 addUser:
-  path: /management/create/user
+  path: /management/users/add
   controller: App\Controller\AdminController::addUser

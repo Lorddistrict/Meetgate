@@ -4,34 +4,29 @@
 
 {% block body %}
 
-    <div class="jumbotron jumbotron-bg">
+  <div class="container spacer">
+    <div class="row">
+      <div class="col-md-12">
+
         <h1 class="display-4">Confirm your account</h1>
         <hr class="my-4">
 
+        {% include 'default/flashs.html.twig' %}
+
         {% if valid is defined and valid == true %}
 
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <h4 class="alert-heading success">Success !</h4>
-                <p class="mb-0 success">Account validated !</p>
-            </div>
-            Your account is now validated, you can now log yourself : <a href="{{ url('login') }}">Log me</a>
+          You can now log yourself : <a href="{{ url('login') }}">Log me</a>
 
         {% elseif valid is defined and valid == false %}
 
-            <div class="alert alert-dismissible alert-danger">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <h4 class="alert-heading danger">Error</h4>
-                <p class="mb-0 danger">
-                    We couldn't validate this account with this code. Please try again.<br>
-                    If this error appear again, please contact the support.
-                </p>
-            </div>
-            <a href="{{ url('register') }}">Go back to the registration page</a>
+          <a href="{{ url('register') }}">> Go back to the registration</a>
 
         {% else %}
 
         {% endif %}
+
+      </div>
     </div>
+  </div>
 
 {% endblock %}
