@@ -3,5 +3,5 @@ talk:
   controller: App\Controller\TalkController::view
 
 submit_talk:
-  path: /submit
+  path: /submit/{id}
   controller: App\Controller\TalkController::add

@@ -1,35 +1,58 @@
+# Default
+
 admin:
   path: /
   controller: App\Controller\AdminController::index
 
-manage_users:
-  path: /management/users
-  controller: App\Controller\AdminController::manageUsers
-
-manage_events:
-  path: /management/events
-  controller: App\Controller\AdminController::manageEvents
-
-manage_talks:
-  path: /management/talks
-  controller: App\Controller\AdminController::manageTalks
-
-top_events:
-  path: /top/events
-  controller: App\Controller\AdminController::topEvents
-
-top_talks:
-  path: /top/talks
-  controller: App\Controller\AdminController::topTalks
+# Events
 
 addEvent:
   path: /management/events/add
-  controller: App\Controller\AdminController::addEvent
+  controller: App\Controller\Admin\EventController::add
+
+manage_events:
+  path: /management/events
+  controller: App\Controller\Admin\EventController::manage
+
+top_events:
+  path: /top/events
+  controller: App\Controller\Admin\EventController::top
+
+# Talks
 
 addTalk:
   path: /management/talks/add
-  controller: App\Controller\AdminController::addTalk
+  controller: App\Controller\Admin\TalkController::add
 
-addUser:
-  path: /management/users/add
-  controller: App\Controller\AdminController::addUser
+manage_talks:
+  path: /management/talks
+  controller: App\Controller\Admin\TalkController::manage
+
+top_talks:
+  path: /top/talks
+  controller: App\Controller\Admin\TalkController::top
+
+# Users
+
+manage_users:
+  path: /management/users
+  controller: App\Controller\Admin\UserController::manage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
