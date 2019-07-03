@@ -28,6 +28,7 @@ class TalkRepository extends ServiceEntityRepository
             ->leftJoin('t.rates', 'r')
             ->where('t.event = e.id')
             ->andWhere('t.event = :event_id')
+            ->andWhere('t.validatedByAdmin is not null')
             ->setParameter('event_id', $event_id)
             ->groupBy('t.id')
             ->orderBy('moy', 'DESC')
@@ -40,6 +41,7 @@ class TalkRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->setMaxResults(5)
+            ->where('t.validatedByAdmin = false')
             ->orderBy('t.created', 'DESC')
             ->getQuery()
             ->getResult();

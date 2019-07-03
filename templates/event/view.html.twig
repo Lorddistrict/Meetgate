@@ -12,6 +12,9 @@
         <div class="container-fluid event">
             <div class="main">
                 <div class="col-md-12">
+
+                    {% include 'default/flashs.html.twig' %}
+
                     <div class="content intro">
                         <div class="row font first">
                             {% if participation is defined and participation == true %}
@@ -139,7 +142,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="container submit-talk">
-                            <a href="{{ url('submit_talk', { id: event.id } ) }}" class="btn btn-secondary btn-block">
+                            <a href="{{ url('addTalk', { id: event.id } ) }}" class="btn btn-secondary btn-block">
                                 <i class="fas fa-plus"></i>&nbsp;Create my own talk for this event
                             </a>
                         </div>

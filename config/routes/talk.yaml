@@ -2,6 +2,6 @@ talk:
   path: /{id}
   controller: App\Controller\TalkController::view
 
-submit_talk:
-  path: /submit/{id}
+addTalk:
+  path: /management/talks/add/{id}
   controller: App\Controller\TalkController::add

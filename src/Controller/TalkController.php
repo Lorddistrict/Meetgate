@@ -34,6 +34,10 @@ class TalkController extends AbstractController
         /** @var Talk $talk */
         $talk = $talkRepository->find($talk->getId());
 
+        if($talk->getValidatedByAdmin() == false){
+            return $this->redirectToRoute('index');
+        }
+
         /** @var Rate $rates */
         $rates = $rateRepository->findBy([
             'talk' => $talk->getId()
@@ -101,6 +105,25 @@ class TalkController extends AbstractController
         /** @var Talk $talk */
         $talk = new Talk();
 
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+
+        /** @var TalkRepository $talkRepository */
+        $talkRepository = $doctrine->getRepository(Talk::class);
+
+        $verifTalk = $talkRepository->findBy([
+            'author' => $currentUser,
+            'event' => $event,
+            'validatedByAdmin' => null,
+        ]);
+
+        if( !empty($verifTalk) ){
+            $this->addFlash('warning', 'You already submited a talk to this event. Please wait an admin to validate the first before submit a second');
+            return $this->redirectToRoute('event', [
+                'id' => $event->getId(),
+            ]);
+        }
+
         $form = $this->createForm(AddTalkType::class, $talk);
         $form->handleRequest($request);
 
@@ -111,15 +134,22 @@ class TalkController extends AbstractController
 
             /** @var DateTime $now */
             $now = new DateTime();
+
             $talk->setCreated($now);
+            $talk->setEvent($event);
+            $talk->setAuthor($currentUser);
+            $talk->setValidatedByAdmin(null);
+
             $em->persist($talk);
             $em->flush();
 
-            $this->addFlash('success', 'A Talk has been created !');
-            return $this->redirectToRoute('admin');
+            $this->addFlash('success', 'You submited a talk. Please wait for an admin to validate it :)');
+            return $this->redirectToRoute('event', [
+                'id' => $event->getId(),
+            ]);
         }
 
-        return $this->render('admin/management/talks/add.html.twig', [
+        return $this->render('talk/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

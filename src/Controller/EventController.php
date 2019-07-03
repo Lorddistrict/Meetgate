@@ -59,7 +59,9 @@ class EventController extends AbstractController
         $participationRepository = $doctrine->getRepository(Participation::class);
 
         /** @var Event $event */
-        $event = $eventRepository->findOneBy(['id' => $event->getId()]);
+        $event = $eventRepository->findOneBy([
+            'id' => $event->getId()
+        ]);
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();

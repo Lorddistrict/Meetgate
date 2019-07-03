@@ -50,6 +50,11 @@ class Talk
      */
     private $rates;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $validatedByAdmin;
+
     public function __construct()
     {
         $this->rates = new ArrayCollection();
@@ -144,6 +149,18 @@ class Talk
                 $rate->setTalk(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getValidatedByAdmin(): ?bool
+    {
+        return $this->validatedByAdmin;
+    }
+
+    public function setValidatedByAdmin(bool $validatedByAdmin): self
+    {
+        $this->validatedByAdmin = $validatedByAdmin;
 
         return $this;
     }

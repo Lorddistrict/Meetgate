@@ -20,13 +20,17 @@ top_events:
 
 # Talks
 
-addTalk:
-  path: /management/talks/add
-  controller: App\Controller\Admin\TalkController::add
-
 manage_talks:
   path: /management/talks
   controller: App\Controller\Admin\TalkController::manage
+
+validate_talk:
+  path: /management/talks/validate/{id}
+  controller: App\Controller\Admin\TalkController::validate
+
+refuse_talk:
+  path: /management/talks/refuse/{id}
+  controller: App\Controller\Admin\TalkController::refuse
 
 top_talks:
   path: /top/talks

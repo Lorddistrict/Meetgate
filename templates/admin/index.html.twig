@@ -72,11 +72,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h1>Last talks :
-                    <a href="" class="btn btn-info">
-                        <i class="fas fa-plus"></i>&nbsp;Add a talk
-                    </a>
-                </h1>
+                <h1>Talk waiting for validation  :</h1>
             </div>
         </div>
         <div class="row">
@@ -92,7 +88,18 @@
                         <div class="card-header">{{ talk.title|upper }}</div>
                         <div class="card-body">
                             <h4 class="card-title">
-                                Rate :
+                                Actions
+                                <br>
+                                <a href="{{ url('validate_talk', { id: talk.id } ) }}">
+                                    <span class="badge badge-pill badge-success">
+                                        <i class="fas fa-check"></i>&nbsp;Validate
+                                    </span>
+                                </a>
+                                <a href="{{ url('refuse_talk', { id: talk.id } ) }}">
+                                    <span class="badge badge-pill badge-danger">
+                                        <i class="fas fa-times"></i>&nbsp;Refuse
+                                    </span>
+                                </a>
                             </h4>
                             <p class="card-text">
                                 {{ talk.description|length > 30 ? talk.description|slice(0,30) : talk.description }}
