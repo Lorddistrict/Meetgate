@@ -76,8 +76,7 @@ class TalkController extends AbstractController
                     'firstname' => $talk_author->getFirstname(),
                     'title' => $talk->getTitle(),
                     'url' => $url,
-                ]),
-                'text/html'
+                ]), 'text/html'
             );
             $mailer->send($message);
 
