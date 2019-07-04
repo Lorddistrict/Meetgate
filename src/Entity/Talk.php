@@ -158,7 +158,7 @@ class Talk
         return $this->validatedByAdmin;
     }
 
-    public function setValidatedByAdmin(bool $validatedByAdmin): self
+    public function setValidatedByAdmin(?bool $validatedByAdmin): self
     {
         $this->validatedByAdmin = $validatedByAdmin;
 

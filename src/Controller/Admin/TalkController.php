@@ -12,14 +12,21 @@ use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TalkController extends AbstractController
 {
+    /**
+     * @return Response
+     */
     public function manage(): Response
     {
         return $this->render('admin/management/talks/talks.html.twig');
     }
 
+    /**
+     * @return Response
+     */
     public function top(): Response
     {
         $doctrine = $this->getDoctrine();
@@ -34,6 +41,12 @@ class TalkController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Talk $talk
+     * @param Swift_Mailer $mailer
+     * @return Response
+     */
     public function validate(Request $request, Talk $talk, Swift_Mailer $mailer): Response
     {
         $doctrine = $this->getDoctrine();
@@ -41,21 +54,28 @@ class TalkController extends AbstractController
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
+        $isAdmin = $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
 
         /** @var User $talk_author */
         $talk_author = $talk->getAuthor();
 
-        if( in_array('[ROLE_ADMIN]', $currentUser->getRoles()) ){
+        if( $isAdmin ){
             $talk->setValidatedByAdmin(true);
             $em->flush();
+
+            $url = $this->generateUrl('talk', [
+                'id' => $talk->getId(),
+            ],UrlGeneratorInterface::ABSOLUTE_URL);
 
             /** @var Swift_Message $message */
             $message = (new Swift_Message('Talk accepted by an Administrator'));
             $message->setFrom('contact@meetgate.com');
             $message->setTo($talk_author->getEmail());
             $message->setBody(
-                $this->render('email/talk_accepted.html.twig', [
+                $this->render('email/talk/accepted.html.twig', [
                     'firstname' => $talk_author->getFirstname(),
+                    'title' => $talk->getTitle(),
+                    'url' => $url,
                 ]),
                 'text/html'
             );
@@ -69,17 +89,40 @@ class TalkController extends AbstractController
         return $this->redirectToRoute('index');
     }
 
-    public function refuse(Request $request, Talk $talk): Response
+    /**
+     * @param Request $request
+     * @param Talk $talk
+     * @param Swift_Mailer $mailer
+     * @return Response
+     */
+    public function refuse(Request $request, Talk $talk, Swift_Mailer $mailer): Response
     {
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
+        $isAdmin = $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
 
-        if( in_array('[ROLE_ADMIN]', $currentUser->getRoles()) ){
+        /** @var User $talk_author */
+        $talk_author = $talk->getAuthor();
+
+        if( $isAdmin ){
             $talk->setValidatedByAdmin(false);
             $em->flush();
+
+            /** @var Swift_Message $message */
+            $message = (new Swift_Message('Talk refused by an Administrator'));
+            $message->setFrom('contact@meetgate.com');
+            $message->setTo($talk_author->getEmail());
+            $message->setBody(
+                $this->render('email/talk/refused.html.twig', [
+                    'firstname' => $talk_author->getFirstname(),
+                    'reason' => 'A good reason',
+                ]),
+                'text/html'
+            );
+            $mailer->send($message);
 
             $this->addFlash('info', 'You refused this talk, the author will be sad but who care ?');
             return $this->redirectToRoute('admin');

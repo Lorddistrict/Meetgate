@@ -1,3 +1,8 @@
+# Date : 04.07.19
+# Source author : Cyrille Grandval
+# Edited by Etienne Crespi
+# Edited by Arthur Djikpo
+
 CONSOLE=bin/console
 DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
@@ -54,11 +59,39 @@ test:
 	$(EXEC) vendor/bin/phpcs --ignore=*/Migrations/* src
 	$(EXEC) vendor/bin/phpstan analyse src -c config/phpstan/phpstan.neon -l 6
 
-
 .PHONY: testF ## Start an analyze of the code and return a checkup
 testF:
 	$(EXEC) vendor/bin/phpcbf src
 
 ##
+## Shortcuts outside container
+##---------------------------------------------------------------------------
+
+.PHONY: buildb ## Rebuild the db
+buildb:
+	$(EXEC) $(CONSOLE) d:d:d --force
+	$(EXEC) $(CONSOLE) d:d:c
+	$(EXEC) $(CONSOLE) d:s:c
+	make start
+
+.PHONY: entity ## Call make:entity
+entity:
+	$(EXEC) $(CONSOLE) make:entity
+
+.PHONY: controller ## Call make:controller
+controller:
+	$(EXEC) $(CONSOLE) make:controller
+
+.PHONY: form ## Call make:form
+form:
+	$(EXEC) $(CONSOLE) make:form
+
+##
 ## Dependencies Files
 ##---------------------------------------------------------------------------
+
+docker-compose.override.yml: docker-compose.override.yml.dist
+	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml
+
+.env.local: .env
+	$(RUN) cp .env .env.local

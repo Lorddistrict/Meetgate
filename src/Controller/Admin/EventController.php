@@ -17,6 +17,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class EventController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param Swift_Mailer $mailer
+     * @return Response
+     * @throws \Exception
+     */
     public function add(Request $request, Swift_Mailer $mailer): Response
     {
         $doctrine = $this->getDoctrine();
@@ -59,7 +65,7 @@ class EventController extends AbstractController
                 $message->setFrom('contact@meetgate.com');
                 $message->setTo($user->getEmail());
                 $message->setBody(
-                    $this->render('email/eventCreated.html.twig', [
+                    $this->render('email/event/eventCreated.html.twig', [
                         'firstname' => $user->getFirstname(),
                         'event' => $event,
                         'url' => $url,
@@ -79,11 +85,17 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function manage(): Response
     {
         return $this->render('admin/management/events/events.html.twig');
     }
 
+    /**
+     * @return Response
+     */
     public function top(): Response
     {
         $doctrine = $this->getDoctrine();

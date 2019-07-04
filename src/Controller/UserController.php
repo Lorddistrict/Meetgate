@@ -78,7 +78,7 @@ class UserController extends AbstractController
             $message->setFrom('contact@meetgate.com');
             $message->setTo($user->getEmail());
             $message->setBody(
-                $this->render('email/registration.html.twig', [
+                $this->render('email/security/registration.html.twig', [
                     'firstname' => $user->getFirstname(),
                     'certified_token' => $token,
                 ]),
@@ -189,7 +189,7 @@ class UserController extends AbstractController
                 ->setFrom('contact@meetgate.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    $this->renderView('email/passwordRecovery.html.twig', [
+                    $this->renderView('email/security/passwordRecovery.html.twig', [
                             'firstname' => $user->getFirstname(),
                             'url' => $url,
                         ]

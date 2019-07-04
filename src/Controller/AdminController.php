@@ -22,6 +22,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AdminController extends AbstractController
 {
+    /**
+     * @return Response
+     */
     public function index() : Response
     {
         /** @var User $currentUser */
@@ -45,7 +48,7 @@ class AdminController extends AbstractController
         $lastEvents = $eventRepository->getLastFiveEvents();
 
         /** @var Talk $lastTalks */
-        $lastTalks = $talkRepository->getLastFiveTalks();
+        $lastTalks = $talkRepository->getLastFiveSubmitedTalks();
 
         return $this->render('admin/index.html.twig', [
             'events' => $lastEvents,

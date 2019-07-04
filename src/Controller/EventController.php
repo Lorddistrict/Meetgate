@@ -102,6 +102,11 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Event $event
+     * @return Response
+     */
     public function join(Request $request, Event $event) : Response
     {
         $doctrine = $this->getDoctrine();
