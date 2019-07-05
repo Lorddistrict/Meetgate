@@ -4,9 +4,13 @@ admin:
   path: /
   controller: App\Controller\AdminController::index
 
+sort:
+  path: /sort
+  controller: App\Controller\Admin\AjaxController:sort
+
 # Events
 
-addEvent:
+add_event:
   path: /management/events/add
   controller: App\Controller\Admin\EventController::add
 
