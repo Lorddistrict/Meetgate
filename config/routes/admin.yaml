@@ -1,35 +1,66 @@
+# Default
+
 admin:
   path: /
   controller: App\Controller\AdminController::index
 
-manage_users:
-  path: /management/users
-  controller: App\Controller\AdminController::manageUsers
+sort:
+  path: /sort
+  controller: App\Controller\Admin\AjaxController:sort
+
+# Events
+
+add_event:
+  path: /management/events/add
+  controller: App\Controller\Admin\EventController::add
 
 manage_events:
   path: /management/events
-  controller: App\Controller\AdminController::manageEvents
-
-manage_talks:
-  path: /management/talks
-  controller: App\Controller\AdminController::manageTalks
+  controller: App\Controller\Admin\EventController::manage
 
 top_events:
   path: /top/events
-  controller: App\Controller\AdminController::topEvents
+  controller: App\Controller\Admin\EventController::top
+
+# Talks
+
+manage_talks:
+  path: /management/talks
+  controller: App\Controller\Admin\TalkController::manage
+
+validate_talk:
+  path: /management/talks/validate/{id}
+  controller: App\Controller\Admin\TalkController::validate
+
+refuse_talk:
+  path: /management/talks/refuse/{id}
+  controller: App\Controller\Admin\TalkController::refuse
 
 top_talks:
   path: /top/talks
-  controller: App\Controller\AdminController::topTalks
+  controller: App\Controller\Admin\TalkController::top
 
-addEvent:
-  path: /management/events/add
-  controller: App\Controller\AdminController::addEvent
+# Users
 
-addTalk:
-  path: /management/talks/add
-  controller: App\Controller\AdminController::addTalk
+manage_users:
+  path: /management/users
+  controller: App\Controller\Admin\UserController::manage
 
-addUser:
-  path: /management/users/add
-  controller: App\Controller\AdminController::addUser
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

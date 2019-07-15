@@ -14,9 +14,6 @@ class AddTalkType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('created')
-            ->add('author')
-            ->add('event')
         ;
     }
 

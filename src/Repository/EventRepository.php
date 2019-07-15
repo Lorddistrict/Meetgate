@@ -47,4 +47,46 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param string $mondayThisWeek
+     * @param string $sundayThisWeek
+     * @return array
+     */
+    public function getEventsThisWeek(string $mondayThisWeek, string $sundayThisWeek): array
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+
+        return $this->createQueryBuilder('e')
+            ->where('e.created > :mondayThisWeek')
+            ->setParameter('mondayThisWeek', $mondayThisWeek)
+            ->andWhere('e.created < :sundayThisWeek')
+            ->setParameter('sundayThisWeek', $sundayThisWeek)
+            ->addSelect('DAY(e.created) AS day, COUNT(DAY(e.created)) AS num')
+            ->groupBy('day')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param string $firstDayThisMonth
+     * @param string $lastDayThisMonth
+     * @return array
+     */
+    public function getEventsThisMonth(string $firstDayThisMonth, string $lastDayThisMonth): array
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('WEEK', 'DoctrineExtensions\Query\Mysql\Week');
+
+        return $this->createQueryBuilder('e')
+            ->where('e.created > :firstDayThisMonth')
+            ->setParameter('firstDayThisMonth', $firstDayThisMonth)
+            ->andWhere('e.created < :lastDayThisMonth')
+            ->setParameter('lastDayThisMonth', $lastDayThisMonth)
+            ->addSelect('WEEK(e.created) AS week, COUNT(WEEK(e.created)) AS num')
+            ->groupBy('week')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

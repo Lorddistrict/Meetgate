@@ -19,6 +19,7 @@
     <div class="meetgate">
         <div class="container-fluid">
             <div class="intro">
+                {% include 'default/flashs.html.twig' %}
                 <div class="our-talks">
                     <h1>Can we help you ?</h1><br>
                     <a href="#events" class="btn btn-top btn-events btn-danger">
@@ -97,7 +98,7 @@
                         <div class="col-md-6 text-right entity">
                             <a href="">
                                 <i class="fas fa-project-diagram fa-4x"></i>
-                                <span>Mett & find</span>
+                                <span>Meet & find</span>
                             </a>
                         </div>
                         <div class="col-md-6 text-left entity">
@@ -113,22 +114,22 @@
     </div>
 
     <script>
-        $(document).ready(function(){
-            $('#search').one('keyup', function(){
+        $(document).ready(function () {
+            $('#search').one('keyup', function () {
                 $.ajax({
                     url: '{{ url('search') }}',
                     type: 'GET',
-                    success: function(data){
+                    success: function (data) {
                         $('#search').autocomplete({
                             source: data[0],
-                            select: function(value, data){
+                            select: function (value, data) {
                                 console.log('You selected: ' + data.item.value);
 
                                 $.ajax({
                                     url: '{{ url('search_event') }}',
                                     type: 'GET',
                                     data: 'research=' + data.item.value,
-                                    success: function(data){
+                                    success: function (data) {
                                         console.log(data[0]);
                                         var url = '{{ url('event', { id : 'id' }) }}';
                                         url = url.replace('id', data[0]);

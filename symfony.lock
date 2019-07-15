@@ -1,4 +1,7 @@
 {
+    "beberlei/doctrineextensions": {
+        "version": "v1.2.2"
+    },
     "bheller/images-generator": {
         "version": "1.0.1"
     },

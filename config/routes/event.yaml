@@ -12,6 +12,6 @@ search_event:
   path: /search_event
   controller: 'App\Controller\AjaxController::searchByEventName'
 
-join:
+join_event:
   path: /join/{id}
   controller: 'App\Controller\EventController::join'
