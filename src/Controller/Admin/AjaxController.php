@@ -31,9 +31,15 @@ class AjaxController extends AbstractController
         $year = date_format($now, 'Y');
 
         $mondayThisWeek = date( 'Y-m-d H:i:s', strtotime( 'monday this week' ) );
+        $mondayThisWeekDay = date( 'd', strtotime( 'monday this week' ) );
         $sundayThisWeek = date( 'Y-m-d H:i:s', strtotime( 'sunday this week' ) );
+        $sundayThisWeekDay = date( 'd', strtotime( 'sunday this week' ) );
 
-//        dd($mondayThisWeek, $sundayThisWeek);
+        $firstDayThisMonth = $year.'-'.$month.'-01 00:00:00';
+        $lastDayThisMonth = $year.'-'.$month.'-30 23:59:59';
+        if($nbDaysthisMonth == 31){
+            $lastDayThisMonth = $year.'-'.$month.'-31 23:59:59';
+        }
 
         /*
          * 0: default option - disabled
@@ -47,25 +53,56 @@ class AjaxController extends AbstractController
                 $events = [];
                 break;
             case 1:
-//                $display = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                $display = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                $display = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+//                $display = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
                 $events = $eventRepository->getEventsThisWeek($mondayThisWeek, $sundayThisWeek);
-                dd($events);
+
+                for($i = $mondayThisWeekDay; $i <= $sundayThisWeekDay; $i++){
+                    $data[$i] = 0;
+                    foreach($events as $key => $event){
+                        if($event['day'] == $i){
+                            $data[$i] = (int)$event['num'];
+                        }
+                    }
+                }
+
                 break;
             case 2:
-                $display = ['week 1', 'week 2', 'week 3', 'week 4'];
-                $events = $eventRepository->getEventsThisMonth();
+//                $display = ['week 1', 'week 2', 'week 3', 'week 4'];
+//                $events = $eventRepository->getEventsThisMonth($firstDayThisMonth, $lastDayThisMonth);
+//
+//                dd($events);
+//
+//                for($i = 1; $i <= $nbDaysthisMonth; $i++){
+//                    $data[$i] = 0;
+//                    foreach($events as $key => $event){
+//                        if($event['day'] == $i){
+//                            $data[$i] = (int)$event['num'];
+//                        }
+//                    }
+//                }
+//
+//                dd($events);
+//
+                $display = [];
+                $events = [];
                 break;
             case 3:
 //                $display = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                $display = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-                $events = $eventRepository->getEventsThisYear();
+//                $display = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+//                $events = $eventRepository->getEventsThisYear();
+                $display = [];
+                $events = [];
                 break;
+        }
+
+        foreach ($data as $key => $value){
+            $newData[] = $value;
         }
 
         return new JsonResponse([
             'display' => $display,
-            'events' => $events,
+            'data' => $newData,
         ]);
     }
 }

@@ -157,6 +157,7 @@
         }
       });
 
+      // If you change the sorting filter
       $('#sortBy').change(function(){
         var sortId = $(this).val();
 
@@ -165,13 +166,18 @@
           type: 'GET',
           data: 'sort=' + sortId,
           success: function(data){
+
             console.log(data);
+
+            var labels = data['display'];
+            var myData = data['data'];
+
             var myChart = new Chart(ctx, {
               type: 'line',
               data: {
-                labels: [],
+                labels: labels,
                 datasets: [{
-                  data: [],
+                  data: myData,
                   lineTension: 0,
                   backgroundColor: 'transparent',
                   borderColor: '#007bff',
@@ -183,7 +189,8 @@
                 scales: {
                   yAxes: [{
                     ticks: {
-                      beginAtZero: false
+                      stepSize: 1,
+                      beginAtZero: true
                     }
                   }]
                 },
