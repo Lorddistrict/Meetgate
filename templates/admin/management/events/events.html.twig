@@ -4,6 +4,70 @@
 
 {% block body %}
 
-  Work in progress
+  <div class="container-fluid">
+    <div class="row">
+
+      <main class="col-md-10 offset-1 pt-4">
+        <h1>Dashboard</h1>
+
+        <section class="row text-center placeholders">
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
+                 class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <div class="text-muted">Something else</div>
+          </div>
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
+                 class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
+                 class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+          <div class="col-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200"
+                 class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+        </section>
+
+        <h2>Section title</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Talk(s) number</th>
+                <th>Date event</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            {% for event in events %}
+              <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description|slice(0,20) }}</td>
+                <td>{{ event.talks|length }}</td>
+                <td>{{ event.dateEvent }}</td>
+                <td>{{ event.duration }}</td>
+              </tr>
+
+            {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
 
 {% endblock %}

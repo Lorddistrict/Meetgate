@@ -59,7 +59,9 @@ class EventController extends AbstractController
         $participationRepository = $doctrine->getRepository(Participation::class);
 
         /** @var Event $event */
-        $event = $eventRepository->findOneBy(['id' => $event->getId()]);
+        $event = $eventRepository->findOneBy([
+            'id' => $event->getId()
+        ]);
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -100,7 +102,11 @@ class EventController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @param Request $request
+     * @param Event $event
+     * @return Response
+     */
     public function join(Request $request, Event $event) : Response
     {
         $doctrine = $this->getDoctrine();

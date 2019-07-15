@@ -1,0 +1,97 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>
+        <i class="fas fa-home"></i>&nbsp;
+        Menu
+      </span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{{ url('admin') }}">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>
+        <i class="fas fa-user"></i>&nbsp;
+        Management
+      </span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{{ url('manage_events') }}">
+          <span data-feather="home"></span>
+          Events (work in progress)
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('manage_talks') }}">
+          <span data-feather="file"></span>
+          Talks (work in progress)
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('manage_users') }}">
+          <span data-feather="shopping-cart"></span>
+          Users (work in progress)
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>
+        <i class="fas fa-list"></i>&nbsp;
+        List
+      </span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          All events (work in progress)
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          All talks (work in progress)
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>
+        <i class="fas fa-plus-square"></i>&nbsp;
+        Add
+      </span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('add_event') }}">
+          <span data-feather="file-text"></span>
+          <i class="fas fa-plus"></i>&nbsp;Event
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
